@@ -1,5 +1,33 @@
 {
   "name": "atlassian-forge-dev-tools",
   "version": "0.0.0",
-  "packageManager": "yarn@4.5.1"
+  "packageManager": "yarn@4.5.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "vue-tsc --noEmit && oxlint --quiet",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "vue": "^3.5.12",
+    "webextension-polyfill": "^0.12.0"
+  },
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@types/chrome": "^0.0.280",
+    "@types/webextension-polyfill": "^0",
+    "@vitejs/plugin-vue": "^5.1.4",
+    "@vue/tsconfig": "^0.5.1",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
+    "oxlint": "^0.11.0",
+    "prettier": "^3.3.3",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.10",
+    "vite-plugin-checker": "^0.8.0",
+    "vite-plugin-oxlint": "^1.1.0",
+    "vite-plugin-web-extension": "^4.2.0",
+    "vue-tsc": "^2.1.10"
+  }
 }
