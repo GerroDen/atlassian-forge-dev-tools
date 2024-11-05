@@ -20,4 +20,7 @@ export default defineConfig({
   define: {
     __BROWSER__: JSON.stringify(env.TARGET),
   },
+  build: {
+    emptyOutDir: true,
+  },
 });
