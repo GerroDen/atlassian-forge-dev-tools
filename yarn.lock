@@ -408,6 +408,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@material/material-color-utilities@npm:^0.2.7":
+  version: 0.2.7
+  resolution: "@material/material-color-utilities@npm:0.2.7"
+  checksum: 10c0/7734f8d7cffe6a92d47fcca82b4846e39ffd79be9c057f3299466696dcdee5379b8a8a3aa6a9692d40bd6900905f689105d9a8ce47882ab22348df10621f70cd
+  languageName: node
+  linkType: hard
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -753,6 +760,22 @@ __metadata:
   version: 4.0.4
   resolution: "@types/http-cache-semantics@npm:4.0.4"
   checksum: 10c0/51b72568b4b2863e0fe8d6ce8aad72a784b7510d72dc866215642da51d84945a9459fa89f49ec48f1e9a1752e6a78e85a4cda0ded06b1c73e727610c925f9ce6
+  languageName: node
+  linkType: hard
+
+"@types/lodash-es@npm:^4":
+  version: 4.17.12
+  resolution: "@types/lodash-es@npm:4.17.12"
+  dependencies:
+    "@types/lodash": "npm:*"
+  checksum: 10c0/5d12d2cede07f07ab067541371ed1b838a33edb3c35cb81b73284e93c6fd0c4bbeaefee984e69294bffb53f62d7272c5d679fdba8e595ff71e11d00f2601dde0
+  languageName: node
+  linkType: hard
+
+"@types/lodash@npm:*":
+  version: 4.17.13
+  resolution: "@types/lodash@npm:4.17.13"
+  checksum: 10c0/c3d0b7efe7933ac0369b99f2f7bff9240d960680fdb74b41ed4bd1b3ca60cca1e31fe4046d9abbde778f941a41bc2a75eb629abf8659fa6c27b66efbbb0802a9
   languageName: node
   linkType: hard
 
@@ -1121,11 +1144,15 @@ __metadata:
   dependencies:
     "@trivago/prettier-plugin-sort-imports": "npm:^4.3.0"
     "@types/chrome": "npm:^0.0.280"
+    "@types/lodash-es": "npm:^4"
     "@types/webextension-polyfill": "npm:^0"
     "@vitejs/plugin-vue": "npm:^5.1.4"
     "@vue/tsconfig": "npm:^0.5.1"
+    beercss: "npm:^3.7.12"
     husky: "npm:^9.1.6"
     lint-staged: "npm:^15.2.10"
+    lodash-es: "npm:^4.17.21"
+    material-dynamic-colors: "npm:^1.1.2"
     oxlint: "npm:^0.11.0"
     prettier: "npm:^3.3.3"
     typescript: "npm:^5.6.3"
@@ -1134,6 +1161,7 @@ __metadata:
     vite-plugin-oxlint: "npm:^1.1.0"
     vite-plugin-web-extension: "npm:^4.2.0"
     vue: "npm:^3.5.12"
+    vue-json-pretty: "npm:^2.4.0"
     vue-tsc: "npm:^2.1.10"
     webextension-polyfill: "npm:^0.12.0"
   languageName: unknown
@@ -1143,6 +1171,15 @@ __metadata:
   version: 1.0.2
   resolution: "balanced-match@npm:1.0.2"
   checksum: 10c0/9308baf0a7e4838a82bbfd11e01b1cb0f0cf2893bc1676c27c2a8c0e70cbae1c59120c3268517a8ae7fb6376b4639ef81ca22582611dbee4ed28df945134aaee
+  languageName: node
+  linkType: hard
+
+"beercss@npm:^3.7.12":
+  version: 3.7.12
+  resolution: "beercss@npm:3.7.12"
+  dependencies:
+    material-dynamic-colors: "npm:^1.1.2"
+  checksum: 10c0/9b8f5f3ef26ef495c05150ec0f76819a1861d388e1bd044b2a31ab63ef27077f405a2a2cfc117966438fc6a5543e5fd6114a711962ca5aaadebbbfde24267b21
   languageName: node
   linkType: hard
 
@@ -2780,6 +2817,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash-es@npm:^4.17.21":
+  version: 4.17.21
+  resolution: "lodash-es@npm:4.17.21"
+  checksum: 10c0/fb407355f7e6cd523a9383e76e6b455321f0f153a6c9625e21a8827d10c54c2a2341bd2ae8d034358b60e07325e1330c14c224ff582d04612a46a4f0479ff2f2
+  languageName: node
+  linkType: hard
+
 "lodash.uniq@npm:^4.5.0":
   version: 4.5.0
   resolution: "lodash.uniq@npm:4.5.0"
@@ -2868,6 +2912,17 @@ __metadata:
   version: 1.2.5
   resolution: "marky@npm:1.2.5"
   checksum: 10c0/ca8a011f287dab1ac3291df720fc32b366c4cd767347b63722966650405ce71ec6566f71d1e22e1768bf6461a7fd689b9038e7df0fcfb62eacf3a5a6dcac249e
+  languageName: node
+  linkType: hard
+
+"material-dynamic-colors@npm:^1.1.2":
+  version: 1.1.2
+  resolution: "material-dynamic-colors@npm:1.1.2"
+  dependencies:
+    "@material/material-color-utilities": "npm:^0.2.7"
+  bin:
+    material-dynamic-colors: cli.js
+  checksum: 10c0/a37a72228fb3b80a6154366681715012aad99107ac57f56fee2b98f737fd8d1f7da3f4c933ba1eeb85e03b8abed92176984863f5a44ae11ccb270a388d44862f
   languageName: node
   linkType: hard
 
@@ -4475,6 +4530,15 @@ __metadata:
   version: 3.0.8
   resolution: "vscode-uri@npm:3.0.8"
   checksum: 10c0/f7f217f526bf109589969fe6e66b71e70b937de1385a1d7bb577ca3ee7c5e820d3856a86e9ff2fa9b7a0bc56a3dd8c3a9a557d3fedd7df414bc618d5e6b567f9
+  languageName: node
+  linkType: hard
+
+"vue-json-pretty@npm:^2.4.0":
+  version: 2.4.0
+  resolution: "vue-json-pretty@npm:2.4.0"
+  peerDependencies:
+    vue: ">=3.0.0"
+  checksum: 10c0/ff2a9621c3e4c357ff84ae217ceb3da76209894b1baefbb957ae1f3449d2fe0c5cbed2daae756cda61f94efa42577432b25a18c169536255c0b75fb5fd960b25
   languageName: node
   linkType: hard
 

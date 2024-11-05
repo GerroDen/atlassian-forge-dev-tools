@@ -4,18 +4,23 @@
   "packageManager": "yarn@4.5.1",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite build --watch --mode development",
     "build": "vite build",
     "lint": "vue-tsc --noEmit && oxlint --quiet",
     "prepare": "husky"
   },
   "dependencies": {
+    "beercss": "^3.7.12",
+    "lodash-es": "^4.17.21",
+    "material-dynamic-colors": "^1.1.2",
     "vue": "^3.5.12",
+    "vue-json-pretty": "^2.4.0",
     "webextension-polyfill": "^0.12.0"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/chrome": "^0.0.280",
+    "@types/lodash-es": "^4",
     "@types/webextension-polyfill": "^0",
     "@vitejs/plugin-vue": "^5.1.4",
     "@vue/tsconfig": "^0.5.1",
