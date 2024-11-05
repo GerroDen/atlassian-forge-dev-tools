@@ -1,9 +1,9 @@
+import vue from "@vitejs/plugin-vue";
 import { env } from "node:process";
 import { defineConfig } from "vite";
-import webExtension from "vite-plugin-web-extension";
-import vue from "@vitejs/plugin-vue";
 import checker from "vite-plugin-checker";
 import oxlintPlugin from "vite-plugin-oxlint";
+import webExtension from "vite-plugin-web-extension";
 
 export default defineConfig({
   plugins: [
@@ -13,7 +13,9 @@ export default defineConfig({
       vueTsc: true,
     }),
     vue(),
-    webExtension(),
+    webExtension({
+      manifest: "src/manifest.json",
+    }),
   ],
   define: {
     __BROWSER__: JSON.stringify(env.TARGET),

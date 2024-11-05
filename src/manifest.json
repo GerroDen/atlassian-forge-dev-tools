@@ -3,5 +3,6 @@
   "{{firefox}}.manifest_version": 2,
   "name": "Atlassian Forge Dev Tools",
   "version": "0.0.0",
-  "description": "Test Vite Plugin Extension with Vue"
+  "description": "",
+  "devtools_page": "src/devtools/index.html"
 }
