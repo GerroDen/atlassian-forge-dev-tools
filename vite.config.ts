@@ -15,6 +15,7 @@ export default defineConfig({
     vue(),
     webExtension({
       manifest: "src/manifest.json",
+      additionalInputs: ["src/panel/index.html"],
     }),
   ],
   define: {
