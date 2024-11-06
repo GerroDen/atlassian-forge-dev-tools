@@ -1,7 +1,7 @@
 name: Build
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -10,14 +10,27 @@ jobs:
       - name: Use Node.js 22
         uses: mskelton/setup-yarn@v3
         with:
-          node-version: '22.x'
+          node-version: "22.x"
       - run: yarn lint
   build:
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chrome, firefox]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Use Node.js 22
         uses: mskelton/setup-yarn@v3
         with:
-          node-version: '22.x'
-      - run: yarn build
+          node-version: "22.x"
+      - run: TARGET=${{matrix.browser}} yarn build
+      - name: Zip
+        uses: montudor/action-zip@v1
+        with:
+          args: zip -qq -r atlassian-forge-dev-tools.zip dist
+      - name: Archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: atlassian-forge-dev-tools.zip
