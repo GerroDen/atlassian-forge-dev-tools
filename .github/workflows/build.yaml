@@ -33,5 +33,5 @@ jobs:
       - name: Archive
         uses: actions/upload-artifact@v4
         with:
-          name: atlassian-forge-dev-tools.zip
+          name: atlassian-forge-dev-tools-${{matrix.browser}}.zip
           path: atlassian-forge-dev-tools.zip
