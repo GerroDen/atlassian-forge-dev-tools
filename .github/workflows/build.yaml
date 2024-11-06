@@ -1,0 +1,15 @@
+name: Build
+on:
+  push:
+    branches: [ "main" ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js 22
+        uses: mskelton/setup-yarn@v3
+        with:
+          node-version: '22.x'
+      - run: yarn lint
+      - run: yarn build
