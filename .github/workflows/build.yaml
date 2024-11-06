@@ -26,12 +26,8 @@ jobs:
         with:
           node-version: "22.x"
       - run: TARGET=${{matrix.browser}} yarn build
-      - name: Zip
-        uses: montudor/action-zip@v1
-        with:
-          args: zip -qq -r atlassian-forge-dev-tools.zip dist
       - name: Archive
         uses: actions/upload-artifact@v4
         with:
           name: atlassian-forge-dev-tools-${{matrix.browser}}.zip
-          path: atlassian-forge-dev-tools.zip
+          path: dist/**/*
