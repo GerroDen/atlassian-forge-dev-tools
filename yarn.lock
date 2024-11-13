@@ -408,13 +408,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@material/material-color-utilities@npm:^0.2.7":
-  version: 0.2.7
-  resolution: "@material/material-color-utilities@npm:0.2.7"
-  checksum: 10c0/7734f8d7cffe6a92d47fcca82b4846e39ffd79be9c057f3299466696dcdee5379b8a8a3aa6a9692d40bd6900905f689105d9a8ce47882ab22348df10621f70cd
-  languageName: node
-  linkType: hard
-
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -1148,13 +1141,13 @@ __metadata:
     "@types/webextension-polyfill": "npm:^0"
     "@vitejs/plugin-vue": "npm:^5.1.4"
     "@vue/tsconfig": "npm:^0.5.1"
-    beercss: "npm:^3.7.12"
+    chrome-devtools-frontend: "npm:^1.0.1380117"
     husky: "npm:^9.1.6"
     lint-staged: "npm:^15.2.10"
     lodash-es: "npm:^4.17.21"
-    material-dynamic-colors: "npm:^1.1.2"
     oxlint: "npm:^0.11.0"
     prettier: "npm:^3.3.3"
+    prettier-plugin-css-order: "npm:^2.1.2"
     typescript: "npm:^5.6.3"
     vite: "npm:^5.4.10"
     vite-plugin-checker: "npm:^0.8.0"
@@ -1171,15 +1164,6 @@ __metadata:
   version: 1.0.2
   resolution: "balanced-match@npm:1.0.2"
   checksum: 10c0/9308baf0a7e4838a82bbfd11e01b1cb0f0cf2893bc1676c27c2a8c0e70cbae1c59120c3268517a8ae7fb6376b4639ef81ca22582611dbee4ed28df945134aaee
-  languageName: node
-  linkType: hard
-
-"beercss@npm:^3.7.12":
-  version: 3.7.12
-  resolution: "beercss@npm:3.7.12"
-  dependencies:
-    material-dynamic-colors: "npm:^1.1.2"
-  checksum: 10c0/9b8f5f3ef26ef495c05150ec0f76819a1861d388e1bd044b2a31ab63ef27077f405a2a2cfc117966438fc6a5543e5fd6114a711962ca5aaadebbbfde24267b21
   languageName: node
   linkType: hard
 
@@ -1377,6 +1361,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"chrome-devtools-frontend@npm:^1.0.1380117":
+  version: 1.0.1380117
+  resolution: "chrome-devtools-frontend@npm:1.0.1380117"
+  checksum: 10c0/0e300f16540da2f28a1cbe1b7e1cf97464b36ce176f9f5d1705565eb172eaae80f2627937714977138075bf08e8dc79602aab1289e8da8957e6d9af8e1c3cfeb
+  languageName: node
+  linkType: hard
+
 "chrome-launcher@npm:1.1.0":
   version: 1.1.0
   resolution: "chrome-launcher@npm:1.1.0"
@@ -1557,6 +1548,15 @@ __metadata:
   dependencies:
     type-fest: "npm:^1.0.1"
   checksum: 10c0/16e11a3c8140398f5408b7fded35a961b9423c5dac39a60cbbd08bd3f0e07d7de130e87262adea7db03ec1a7a4b7551054e0db07ee5408b012bac5400cfc07a5
+  languageName: node
+  linkType: hard
+
+"css-declaration-sorter@npm:^7.1.1":
+  version: 7.2.0
+  resolution: "css-declaration-sorter@npm:7.2.0"
+  peerDependencies:
+    postcss: ^8.0.9
+  checksum: 10c0/d8516be94f8f2daa233ef021688b965c08161624cbf830a4d7ee1099429437c0ee124d35c91b1c659cfd891a68e8888aa941726dab12279bc114aaed60a94606
   languageName: node
   linkType: hard
 
@@ -2915,17 +2915,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"material-dynamic-colors@npm:^1.1.2":
-  version: 1.1.2
-  resolution: "material-dynamic-colors@npm:1.1.2"
-  dependencies:
-    "@material/material-color-utilities": "npm:^0.2.7"
-  bin:
-    material-dynamic-colors: cli.js
-  checksum: 10c0/a37a72228fb3b80a6154366681715012aad99107ac57f56fee2b98f737fd8d1f7da3f4c933ba1eeb85e03b8abed92176984863f5a44ae11ccb270a388d44862f
-  languageName: node
-  linkType: hard
-
 "md5@npm:^2.3.0":
   version: 2.3.0
   resolution: "md5@npm:2.3.0"
@@ -3509,6 +3498,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"postcss-less@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "postcss-less@npm:6.0.0"
+  peerDependencies:
+    postcss: ^8.3.5
+  checksum: 10c0/09869ba66e1340f03d6ffd34cba2721f48d1c4a71314af5b10d8a3cc4f78c15f22da809442bf5e50d04eff2a96389d6a0fdb9f0c20a191945aacfb1747fd47ca
+  languageName: node
+  linkType: hard
+
+"postcss-scss@npm:^4.0.9":
+  version: 4.0.9
+  resolution: "postcss-scss@npm:4.0.9"
+  peerDependencies:
+    postcss: ^8.4.29
+  checksum: 10c0/f917ecfd4b9113a6648e966a41f027ff7e14238393914978d44596e227a50f084667dc8818742348dc7d8b20130b30d4259aca1d4db86754a9c141202ae03714
+  languageName: node
+  linkType: hard
+
 "postcss@npm:^8.4.43, postcss@npm:^8.4.47":
   version: 8.4.47
   resolution: "postcss@npm:8.4.47"
@@ -3517,6 +3524,19 @@ __metadata:
     picocolors: "npm:^1.1.0"
     source-map-js: "npm:^1.2.1"
   checksum: 10c0/929f68b5081b7202709456532cee2a145c1843d391508c5a09de2517e8c4791638f71dd63b1898dba6712f8839d7a6da046c72a5e44c162e908f5911f57b5f44
+  languageName: node
+  linkType: hard
+
+"prettier-plugin-css-order@npm:^2.1.2":
+  version: 2.1.2
+  resolution: "prettier-plugin-css-order@npm:2.1.2"
+  dependencies:
+    css-declaration-sorter: "npm:^7.1.1"
+    postcss-less: "npm:^6.0.0"
+    postcss-scss: "npm:^4.0.9"
+  peerDependencies:
+    prettier: 3.x
+  checksum: 10c0/e6e8230048fb9d994cde207796b35e0e074cb83420b0c17c764353da290bb2b3d099265bf65537a70c03e60a0854bfa4ce2576b436933d8b4b0d86bdd61a6e73
   languageName: node
   linkType: hard
 
