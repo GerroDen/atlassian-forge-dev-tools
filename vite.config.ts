@@ -3,6 +3,7 @@ import { defineConfig } from "vite";
 import checker from "vite-plugin-checker";
 import oxlintPlugin from "vite-plugin-oxlint";
 import webExtension from "vite-plugin-web-extension";
+import packageJson from "./package.json" with { type :"json" };
 
 export default defineConfig(({ mode }) => {
   let watch = undefined;
@@ -22,7 +23,15 @@ export default defineConfig(({ mode }) => {
       }),
       vue(),
       webExtension({
-        manifest: "src/manifest.json",
+        manifest: () => {
+          return {
+            manifest_version: 3,
+            name: "Atlassian Forge Dev Tools",
+            version: packageJson.version,
+            description: "",
+            devtools_page: "src/devtools/index.html",
+          };
+        },
         additionalInputs: ["src/panel/index.html"],
         disableAutoLaunch: true,
       }),
