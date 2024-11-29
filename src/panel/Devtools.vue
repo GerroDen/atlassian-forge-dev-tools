@@ -13,8 +13,10 @@ interface Entry {
   payload: unknown;
 }
 
+// type inferrence is erronous
 const requests = ref<Entry[]>([]) as Ref<Entry[]>;
-const selectedEntry = ref<Entry>() as Ref<Entry>;
+// type inferrence is erronous
+const selectedEntry = ref<Entry>() as Ref<Entry | undefined>;
 const filterInput = ref<string>();
 const selectedResponse = ref<unknown>();
 
@@ -53,6 +55,14 @@ const filteredRequests = computed(() => {
   });
 });
 
+const toggleSelectedEntry = (request: Entry) => {
+  if (selectedEntry.value === request) {
+    selectedEntry.value = undefined;
+  } else {
+    selectedEntry.value = request;
+  }
+};
+
 onMounted(() => {
   chrome.devtools.network.onRequestFinished.addListener(addRequest);
 });
@@ -84,7 +94,7 @@ onUnmounted(() => {
             </tr>
           </thead>
           <tbody>
-            <tr v-for="request in filteredRequests" :class="{ selected: request === selectedEntry }" @click="selectedEntry = request">
+            <tr v-for="request in filteredRequests" :class="{ selected: request === selectedEntry }" @click="toggleSelectedEntry(request)">
               <td :title="request.functionKey">{{ request.functionKey }}</td>
               <td :title="request.environmentType">{{ request.environmentType }}</td>
               <td :title="request.environmentId">{{ request.environmentId }}</td>
@@ -132,14 +142,14 @@ table {
 }
 
 label {
-  width: 100%;
   display: block;
-  font: var(--sys-typescale-monospace-bold);
-  background: var(--color-background-highlight);
-  z-index: 1;
   position: sticky;
   top: 0;
   left: 0;
+  z-index: 1;
+  background: var(--color-background-highlight);
+  width: 100%;
+  font: var(--sys-typescale-monospace-bold);
 }
 
 .scroll {
