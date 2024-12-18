@@ -20,7 +20,7 @@ const selectedEntry = ref<Entry>() as Ref<Entry | undefined>;
 const filterInput = ref<string>();
 const selectedResponse = ref<unknown>();
 
-const addRequest = (request: Request) => {
+function addRequest(request: Request) {
   if (!request.request.url.endsWith(".atlassian.net/gateway/api/graphql")) return;
   const requestBody = JSON.parse(request.request.postData?.text ?? "null");
   const operationName = get(requestBody, "operationName");
@@ -34,7 +34,7 @@ const addRequest = (request: Request) => {
     extensionType: get(payload, "context.extension.type"),
     payload: get(payload, "call.payload"),
   });
-};
+}
 
 watch(selectedEntry, () => {
   selectedResponse.value = undefined;
@@ -55,13 +55,19 @@ const filteredRequests = computed(() => {
   });
 });
 
-const toggleSelectedEntry = (request: Entry) => {
+function toggleSelectedEntry(request: Entry) {
   if (selectedEntry.value === request) {
     selectedEntry.value = undefined;
   } else {
     selectedEntry.value = request;
   }
-};
+}
+
+function clear() {
+  console.log("clear");
+  requests.value.splice(0);
+  selectedEntry.value = undefined;
+}
 
 onMounted(() => {
   chrome.devtools.network.onRequestFinished.addListener(addRequest);
@@ -74,7 +80,7 @@ onUnmounted(() => {
 
 <template>
   <div class="search-drawer-header">
-    <button class="toolbar-button" @click="requests.splice(0)">Clear</button>
+    <button class="toolbar-button" @click="clear()">Clear</button>
     <div class="search-toolbar">
       <div class="toolbar-item-search">
         <input v-model.trim="filterInput" class="search-toolbar-input" type="text" placeholder="Filter" />
@@ -105,6 +111,7 @@ onUnmounted(() => {
       </div>
     </div>
     <div v-if="selectedEntry" class="shadow-split-widget-contents shadow-split-widget-sidebar vbox">
+      <div class="close-button"><button @click="selectedEntry = undefined">close</button></div>
       <div class="scroll">
         <label>Request</label>
         <div class="json-view">
@@ -158,5 +165,12 @@ label {
 
 .json-view {
   width: max-content;
+}
+
+.close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 100;
 }
 </style>
