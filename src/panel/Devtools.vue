@@ -79,18 +79,17 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="search-drawer-header">
-    <button class="toolbar-button" @click="clear()">Clear</button>
-    <div class="search-toolbar">
+  <div class="h-full flex flex-col">
+    <div class="flex-none search-drawer-header">
+      <button class="toolbar-button" @click="clear()">Clear</button>
       <div class="toolbar-item-search">
         <input v-model.trim="filterInput" class="search-toolbar-input" type="text" placeholder="Filter" />
       </div>
+      <button v-if="selectedEntry" @click="selectedEntry = undefined">close</button>
     </div>
-  </div>
-  <div class="shadow-split-widget">
-    <div class="shadow-split-widget-contents shadow-split-widget-main vbox">
-      <div class="wrapping-container striped">
-        <table>
+    <div class="flex-1 grid" :class="{ 'grid-cols-2': selectedEntry }">
+      <div class="striped">
+        <table class="h-auto!">
           <thead>
             <tr>
               <th>functionKey</th>
@@ -109,17 +108,16 @@ onUnmounted(() => {
           </tbody>
         </table>
       </div>
-    </div>
-    <div v-if="selectedEntry" class="shadow-split-widget-contents shadow-split-widget-sidebar vbox">
-      <div class="close-button"><button @click="selectedEntry = undefined">close</button></div>
-      <div class="scroll">
-        <label>Request</label>
-        <div class="json-view">
-          <json-pretty :data="selectedEntry.payload" theme="dark" show-icon />
-        </div>
-        <label>Response</label>
-        <div class="json-view">
-          <json-pretty v-if="selectedResponse" :data="selectedResponse" theme="dark" show-icon />
+      <div class="pos-relative border border-l-solid border-l-divider-line" v-if="selectedEntry">
+        <div class="h-full overflow-auto">
+          <label>Request</label>
+          <div class="w-max">
+            <json-pretty :data="selectedEntry?.payload" theme="dark" show-icon />
+          </div>
+          <label>Response</label>
+          <div class="w-max">
+            <json-pretty v-if="selectedResponse" :data="selectedResponse" theme="dark" show-icon />
+          </div>
         </div>
       </div>
     </div>
@@ -129,48 +127,19 @@ onUnmounted(() => {
 <style scoped>
 @import "chrome-devtools-frontend/front_end/ui/components/data_grid/dataGrid.css";
 @import "chrome-devtools-frontend/front_end/ui/components/input/textInput.css";
-@import "chrome-devtools-frontend/front_end/ui/legacy/splitWidget.css";
 @import "chrome-devtools-frontend/front_end/panels/search/searchView.css";
-
-table {
-  height: auto;
-}
-
-.shadow-split-widget {
-  height: 100%;
-}
-
-.shadow-split-widget-sidebar {
-  width: 50%;
-
-  > div {
-    min-height: auto;
-  }
-}
 
 label {
   display: block;
   position: sticky;
   top: 0;
   left: 0;
+  align-content: center;
   z-index: 1;
   background: var(--color-background-highlight);
+  padding-inline: 0.25rem;
   width: 100%;
+  height: 1rem;
   font: var(--sys-typescale-monospace-bold);
-}
-
-.scroll {
-  overflow: auto;
-}
-
-.json-view {
-  width: max-content;
-}
-
-.close-button {
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 100;
 }
 </style>
