@@ -1,10 +1,10 @@
 import vue from "@vitejs/plugin-vue";
+import packageJson from "./package.json" with { type :"json" };
+import UnoCSS from "unocss/vite";
 import { defineConfig } from "vite";
 import checker from "vite-plugin-checker";
 import oxlintPlugin from "vite-plugin-oxlint";
 import webExtension from "vite-plugin-web-extension";
-import packageJson from "./package.json" with { type :"json" };
-import UnoCSS from 'unocss/vite'
 
 export default defineConfig(({ mode }) => {
   let watch = undefined;
@@ -23,7 +23,13 @@ export default defineConfig(({ mode }) => {
         vueTsc: true,
       }),
       vue(),
-      UnoCSS(),
+      UnoCSS({
+        theme: {
+          colors: {
+            dividerLine: "var(--divider-line)",
+          },
+        },
+      }),
       webExtension({
         manifest: () => {
           return {
