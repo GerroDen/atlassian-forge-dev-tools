@@ -13,12 +13,23 @@ interface Entry {
   payload: unknown;
 }
 
+interface ForgeFunctionError {
+  message: string;
+}
+
+interface ForgeFunctionResponse {
+  response?: {
+    body?: unknown;
+  };
+  errors?: ForgeFunctionError[];
+}
+
 // type inferrence is erronous
 const requests = ref<Entry[]>([]) as Ref<Entry[]>;
 // type inferrence is erronous
 const selectedEntry = ref<Entry>() as Ref<Entry | undefined>;
 const filterInput = ref<string>();
-const selectedResponse = ref<unknown>();
+const selectedResponse = ref<ForgeFunctionResponse>();
 
 function addRequest(request: Request) {
   if (!request.request.url.endsWith(".atlassian.net/gateway/api/graphql")) return;
@@ -40,7 +51,7 @@ watch(selectedEntry, () => {
   selectedResponse.value = undefined;
   selectedEntry.value?.request?.getContent((content) => {
     let responseBody = JSON.parse(content);
-    selectedResponse.value = get(responseBody, "data.invokeExtension.response.body");
+    selectedResponse.value = get(responseBody, "data.invokeExtension");
   });
 });
 
@@ -114,9 +125,11 @@ onUnmounted(() => {
           <div class="w-max">
             <json-pretty :data="selectedEntry?.payload" theme="dark" show-icon />
           </div>
-          <label>Response</label>
+          <label v-if="!selectedResponse?.errors">Response</label>
+          <label v-if="selectedResponse?.errors" class="error">[Error]</label>
           <div class="w-max">
-            <json-pretty v-if="selectedResponse" :data="selectedResponse" theme="dark" show-icon />
+            <json-pretty v-if="selectedResponse?.response" :data="selectedResponse.response?.body" theme="dark" show-icon />
+            <pre v-if="selectedResponse?.errors" v-for="error in selectedResponse?.errors">{{ error.message }}</pre>
           </div>
         </div>
       </div>
@@ -141,5 +154,9 @@ label {
   width: 100%;
   height: 1rem;
   font: var(--sys-typescale-monospace-bold);
+
+  &.error {
+    background: var(--color-red);
+  }
 }
 </style>
