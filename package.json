@@ -1,6 +1,6 @@
 {
   "name": "atlassian-forge-dev-tools",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "packageManager": "yarn@4.6.0",
   "type": "module",
   "scripts": {
