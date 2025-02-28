@@ -752,7 +752,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash-es@npm:^4":
+"@types/lodash-es@npm:^4.17.12":
   version: 4.17.12
   resolution: "@types/lodash-es@npm:4.17.12"
   dependencies:
@@ -784,10 +784,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/webextension-polyfill@npm:^0":
-  version: 0.12.1
-  resolution: "@types/webextension-polyfill@npm:0.12.1"
-  checksum: 10c0/d6e6253bbd020dcfa40391112212e3486320760d12c58854d0410140bda7ad0476749b9476e18d6888a1b04092662715b488f470c3aa29b44768990ffaf6d194
+"@types/webextension-polyfill@npm:^0.12.2":
+  version: 0.12.2
+  resolution: "@types/webextension-polyfill@npm:0.12.2"
+  checksum: 10c0/16ba180c3e214d555c42f69fa14a10762746900f7391120ac462881ece7fe32f10c3f213e0a7fa26f5d33ae515d060bc109638998119e3733ee49837e881f667
   languageName: node
   linkType: hard
 
@@ -1401,8 +1401,8 @@ __metadata:
   dependencies:
     "@trivago/prettier-plugin-sort-imports": "npm:^5.2.2"
     "@types/chrome": "npm:^0.0.307"
-    "@types/lodash-es": "npm:^4"
-    "@types/webextension-polyfill": "npm:^0"
+    "@types/lodash-es": "npm:^4.17.12"
+    "@types/webextension-polyfill": "npm:^0.12.2"
     "@vitejs/plugin-vue": "npm:^5.2.1"
     "@vue/tsconfig": "npm:^0.7.0"
     chrome-devtools-frontend: "npm:^1.0.1418433"
