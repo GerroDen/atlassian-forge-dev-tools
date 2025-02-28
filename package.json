@@ -10,30 +10,30 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "chrome-devtools-frontend": "^1.0.1386602",
+    "chrome-devtools-frontend": "^1.0.1418433",
     "lodash-es": "^4.17.21",
     "vue": "^3.5.13",
     "vue-json-pretty": "^2.4.0",
     "webextension-polyfill": "^0.12.0"
   },
   "devDependencies": {
-    "@trivago/prettier-plugin-sort-imports": "^5.2.0",
-    "@types/chrome": "^0.0.287",
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+    "@types/chrome": "^0.0.307",
     "@types/lodash-es": "^4",
     "@types/webextension-polyfill": "^0",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/tsconfig": "^0.7.0",
     "husky": "^9.1.7",
-    "lint-staged": "^15.2.11",
-    "oxlint": "^0.15.3",
-    "prettier": "^3.4.2",
+    "lint-staged": "^15.4.3",
+    "oxlint": "^0.15.12",
+    "prettier": "^3.5.2",
     "prettier-plugin-css-order": "^2.1.2",
-    "typescript": "~5.6.3",
-    "unocss": "^0.65.2",
-    "vite": "^6.0.5",
-    "vite-plugin-checker": "^0.8.0",
-    "vite-plugin-oxlint": "^1.1.3",
-    "vite-plugin-web-extension": "^4.3.1",
-    "vue-tsc": "^2.1.10"
+    "typescript": "~5.7.3",
+    "unocss": "^66.0.0",
+    "vite": "^6.2.0",
+    "vite-plugin-checker": "^0.9.0",
+    "vite-plugin-oxlint": "^1.2.3",
+    "vite-plugin-web-extension": "^4.4.3",
+    "vue-tsc": "^2.2.4"
   }
 }
