@@ -1,5 +1,5 @@
+import packageJson from "./package.json" with { type: "json" };
 import vue from "@vitejs/plugin-vue";
-import packageJson from "./package.json" with { type :"json" };
 import UnoCSS from "unocss/vite";
 import { defineConfig } from "vite";
 import checker from "vite-plugin-checker";
@@ -38,7 +38,12 @@ export default defineConfig(({ mode }) => {
             version: packageJson.version,
             description: "",
             devtools_page: "src/devtools/index.html",
-          };
+            browser_specific_settings: {
+              gecko: {
+                id: "atlassian-forge-dev-tools@seibert.group",
+              },
+            },
+          } satisfies chrome.runtime.ManifestV3;
         },
         additionalInputs: ["src/panel/index.html"],
         disableAutoLaunch: true,
