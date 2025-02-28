@@ -1,1 +1,1 @@
-chrome.devtools.panels.create("Atlassian Forge", "", "src/panel/index.html");
+chrome.devtools.panels.create("Atlassian Forge", "", "../../src/panel/index.html");
