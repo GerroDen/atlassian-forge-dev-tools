@@ -97,10 +97,10 @@ onUnmounted(() => {
       <div class="toolbar-item-search">
         <input v-model.trim="filterInput" class="search-toolbar-input" type="text" placeholder="Filter" />
       </div>
-      <button v-if="selectedEntry" @click="selectedEntry = undefined">close</button>
+      <button v-if="selectedEntry" class="ml-1" @click="selectedEntry = undefined">close</button>
     </div>
     <div class="flex-1 grid" :class="{ 'grid-cols-2': selectedEntry }">
-      <div class="striped">
+      <div class="data-grid striped">
         <table class="h-auto!">
           <thead>
             <tr>
@@ -111,7 +111,7 @@ onUnmounted(() => {
             </tr>
           </thead>
           <tbody>
-            <tr v-for="request in filteredRequests" :class="{ selected: request === selectedEntry }" @click="toggleSelectedEntry(request)">
+            <tr v-for="request in filteredRequests" class="revealed" :class="{ selected: request === selectedEntry }" @click="toggleSelectedEntry(request)">
               <td :title="request.functionKey">{{ request.functionKey }}</td>
               <td :title="request.environmentType">{{ request.environmentType }}</td>
               <td :title="request.environmentId">{{ request.environmentId }}</td>
@@ -139,7 +139,7 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-@import "chrome-devtools-frontend/front_end/ui/components/data_grid/dataGrid.css";
+@import "chrome-devtools-frontend/front_end/ui/legacy/components/data_grid/dataGrid.css";
 @import "chrome-devtools-frontend/front_end/ui/components/input/textInput.css";
 @import "chrome-devtools-frontend/front_end/panels/search/searchView.css";
 
@@ -150,7 +150,7 @@ label {
   left: 0;
   align-content: center;
   z-index: 1;
-  background: var(--color-background-highlight);
+  background: var(--color-grid-selected);
   padding-inline: 0.25rem;
   width: 100%;
   height: 1rem;

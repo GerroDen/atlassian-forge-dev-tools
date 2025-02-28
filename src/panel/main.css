@@ -1,6 +1,4 @@
-@import "chrome-devtools-frontend/front_end/ui/legacy/applicationColorTokens.css";
-@import "chrome-devtools-frontend/front_end/ui/legacy/designTokens.css";
+@import "chrome-devtools-frontend/front_end/design_system_tokens.css";
+@import "chrome-devtools-frontend/front_end/application_tokens.css";
 @import "chrome-devtools-frontend/front_end/ui/legacy/inspectorCommon.css";
-@import "chrome-devtools-frontend/front_end/ui/legacy/themeColors.css";
-@import "chrome-devtools-frontend/front_end/ui/legacy/tokens.css";
 @import "vue-json-pretty/lib/styles.css";
