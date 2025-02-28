@@ -32,7 +32,8 @@ const filterInput = ref<string>();
 const selectedResponse = ref<ForgeFunctionResponse>();
 
 function addRequest(request: Request) {
-  if (!request.request.url.endsWith(".atlassian.net/gateway/api/graphql")) return;
+  const url = new URL(request.request.url);
+  if (!url.pathname.endsWith("/gateway/api/graphql")) return;
   const requestBody = JSON.parse(request.request.postData?.text ?? "null");
   const operationName = get(requestBody, "operationName");
   if (operationName !== "forge_ui_invokeExtension") return;
