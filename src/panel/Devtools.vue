@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { get } from "lodash-es";
-import { computed, onMounted, onUnmounted, type Ref, ref, watch } from "vue";
+import type { Har, Request as HarRequest } from "har-format";
+import { get, isString } from "lodash-es";
+import { computed, onMounted, onUnmounted, type Ref, ref, useTemplateRef, watch } from "vue";
 
-type Request = chrome.devtools.network.Request;
+type RequestEntry = chrome.devtools.network.Request | chrome.devtools.network.HAREntry;
 
 interface Entry {
-  request: Request;
+  request: RequestEntry;
   functionKey: string;
   environmentType: string;
   environmentId: string;
@@ -30,8 +31,9 @@ const requests = ref<Entry[]>([]) as Ref<Entry[]>;
 const selectedEntry = ref<Entry>() as Ref<Entry | undefined>;
 const filterInput = ref<string>();
 const selectedResponse = ref<ForgeFunctionResponse>();
+const harFileRef = useTemplateRef<HTMLInputElement>("harFile");
 
-function addRequest(request: Request) {
+function addRequest(request: RequestEntry) {
   const url = new URL(request.request.url);
   if (!url.pathname.endsWith("/gateway/api/graphql")) return;
   const requestBody = JSON.parse(request.request.postData?.text ?? "null");
@@ -50,10 +52,15 @@ function addRequest(request: Request) {
 
 watch(selectedEntry, () => {
   selectedResponse.value = undefined;
-  selectedEntry.value?.request?.getContent((content) => {
-    let responseBody = JSON.parse(content);
-    selectedResponse.value = get(responseBody, "data.invokeExtension");
-  });
+  const request = selectedEntry.value?.request;
+  if (!request) return;
+  if ("getContent" in request) {
+    request?.getContent((content) => {
+      let responseBody = JSON.parse(content);
+      selectedResponse.value = get(responseBody, "data.invokeExtension");
+    });
+  }
+  selectedResponse.value = get(request.response, "data.invokeExtension");
 });
 
 const filteredRequests = computed(() => {
@@ -81,6 +88,20 @@ function clear() {
   selectedEntry.value = undefined;
 }
 
+function analyzeHar() {
+  const inputValue = harFileRef.value;
+  const fileReader = new FileReader();
+  const file = inputValue?.files?.[0];
+  if (!file) return;
+  fileReader.readAsText(file);
+  fileReader.addEventListener("load", () => {
+    requests.value = [];
+    if (!isString(fileReader.result)) return;
+    const har = JSON.parse(fileReader.result) as Har;
+    har.log.entries.forEach(addRequest);
+  });
+}
+
 onMounted(() => {
   chrome.devtools.network.onRequestFinished.addListener(addRequest);
 });
@@ -97,6 +118,8 @@ onUnmounted(() => {
       <div class="toolbar-item-search m-0!">
         <input v-model.trim="filterInput" class="search-toolbar-input" type="text" placeholder="Filter" />
       </div>
+      <button class="text-button" @click="harFileRef?.click">Upload HAR</button>
+      <input ref="harFile" type="file" accept=".har" @change="analyzeHar" class="hidden" />
       <button v-if="selectedEntry" class="text-button" @click="selectedEntry = undefined">close</button>
     </div>
     <div class="flex-1 grid" :class="{ 'grid-cols-2': selectedEntry }">
