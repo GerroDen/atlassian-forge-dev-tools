@@ -92,12 +92,12 @@ onUnmounted(() => {
 
 <template>
   <div class="h-full flex flex-col">
-    <div class="flex-none search-drawer-header">
-      <button class="toolbar-button" @click="clear()">Clear</button>
-      <div class="toolbar-item-search">
+    <div class="search-drawer-header gap-col-1">
+      <button class="text-button" @click="clear()">Clear</button>
+      <div class="toolbar-item-search m-0!">
         <input v-model.trim="filterInput" class="search-toolbar-input" type="text" placeholder="Filter" />
       </div>
-      <button v-if="selectedEntry" class="ml-1" @click="selectedEntry = undefined">close</button>
+      <button v-if="selectedEntry" class="text-button" @click="selectedEntry = undefined">close</button>
     </div>
     <div class="flex-1 grid" :class="{ 'grid-cols-2': selectedEntry }">
       <div class="data-grid striped">
@@ -140,6 +140,8 @@ onUnmounted(() => {
 
 <style scoped>
 @import "chrome-devtools-frontend/front_end/ui/legacy/components/data_grid/dataGrid.css";
+@import "chrome-devtools-frontend/front_end/ui/components/buttons/button.css";
+@import "chrome-devtools-frontend/front_end/ui/components/buttons/textButton.css";
 @import "chrome-devtools-frontend/front_end/ui/components/input/textInput.css";
 @import "chrome-devtools-frontend/front_end/panels/search/searchView.css";
 
