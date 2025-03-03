@@ -55,12 +55,15 @@ watch(selectedEntry, () => {
   const request = selectedEntry.value?.request;
   if (!request) return;
   if ("getContent" in request) {
-    request?.getContent((content) => {
-      let responseBody = JSON.parse(content);
+    request.getContent((content) => {
+      const responseBody = JSON.parse(content);
       selectedResponse.value = get(responseBody, "data.invokeExtension");
     });
   }
-  selectedResponse.value = get(request.response, "data.invokeExtension");
+  const content = request.response.content.text;
+  if (!content) return;
+  const responseBody = JSON.parse(content);
+  selectedResponse.value = get(responseBody, "data.invokeExtension");
 });
 
 const filteredRequests = computed(() => {
