@@ -1,5 +1,3 @@
-Browser extension for Devtools to inspect Atlassian Forge function calls made via GraphQL APIs in Atlassian Cloud instances.
-
 This extension analyzes network requests made to Atlassian's GraphQL APIs and displays all requests and responses to Atlassian Forge functions in a more readable and easily accessible way than the default network console. Analyzation is performed inside the browser without any external supplies.
 
 The extension is released for Chrome and Firefox:
