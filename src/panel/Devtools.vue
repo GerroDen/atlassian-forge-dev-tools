@@ -86,7 +86,6 @@ function toggleSelectedEntry(request: Entry) {
 }
 
 function clear() {
-  console.log("clear");
   requests.value.splice(0);
   selectedEntry.value = undefined;
 }
@@ -107,23 +106,24 @@ function analyzeHar() {
 
 onMounted(() => {
   chrome.devtools.network.onRequestFinished.addListener(addRequest);
+  chrome.devtools.network.onNavigated.addListener(clear);
 });
 
 onUnmounted(() => {
   chrome.devtools.network.onRequestFinished.removeListener(addRequest);
+  chrome.devtools.network.onNavigated.removeListener(clear);
 });
 </script>
 
 <template>
   <div class="h-full flex flex-col">
     <div class="search-drawer-header gap-col-1">
-      <button class="text-button" @click="clear()">Clear</button>
+      <button class="icon" @click="clear()" title="Clear Calls"><devtools-icon class="i-mdi:cancel" /></button>
       <div class="toolbar-item-search m-0!">
         <input v-model.trim="filterInput" class="search-toolbar-input" type="text" placeholder="Filter" />
       </div>
-      <button class="text-button" @click="harFileRef?.click">Upload HAR</button>
+      <button class="icon" @click="harFileRef?.click" title="Import HAR"><devtools-icon class="i-mdi:upload" /></button>
       <input ref="harFile" type="file" accept=".har" @change="analyzeHar" class="hidden" />
-      <button v-if="selectedEntry" class="text-button" @click="selectedEntry = undefined">close</button>
     </div>
     <div class="flex-1 grid" :class="{ 'grid-cols-2': selectedEntry }">
       <div class="data-grid striped">
@@ -146,8 +146,9 @@ onUnmounted(() => {
           </tbody>
         </table>
       </div>
-      <div class="pos-relative border border-l-solid border-l-divider-line" v-if="selectedEntry">
+      <div class="pos-relative border border-l-solid border-l-divider-line border-t-solid border-t-divider-line" v-if="selectedEntry">
         <div class="h-full overflow-auto">
+          <button class="icon" @click="selectedEntry = undefined" title="Close Details"><devtools-icon class="i-mdi:close" /></button>
           <label>Request</label>
           <div class="w-max">
             <json-pretty :data="selectedEntry?.payload" theme="dark" show-icon />
