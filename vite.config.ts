@@ -1,6 +1,6 @@
 import packageJson from "./package.json" with { type: "json" };
 import vue from "@vitejs/plugin-vue";
-import UnoCSS from "unocss/vite";
+import unocss from "unocss/vite";
 import { defineConfig } from "vite";
 import checker from "vite-plugin-checker";
 import oxlintPlugin from "vite-plugin-oxlint";
@@ -23,13 +23,7 @@ export default defineConfig(({ mode }) => {
         vueTsc: true,
       }),
       vue(),
-      UnoCSS({
-        theme: {
-          colors: {
-            dividerLine: "var(--divider-line)",
-          },
-        },
-      }),
+      unocss(),
       webExtension({
         manifest: () => {
           return {

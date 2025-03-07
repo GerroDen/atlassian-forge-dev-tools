@@ -439,7 +439,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@iconify/types@npm:^2.0.0":
+"@iconify-json/mdi@npm:^1.2.3":
+  version: 1.2.3
+  resolution: "@iconify-json/mdi@npm:1.2.3"
+  dependencies:
+    "@iconify/types": "npm:*"
+  checksum: 10c0/4d11426abba03464e5ebe4675c87cc39c720e54b7c28265ff9ccd93f229a51f7616bb0a8f1c01412eac3cc9a1ebdc0a122bbaa3395c14d30834d96f8a141e96d
+  languageName: node
+  linkType: hard
+
+"@iconify/types@npm:*, @iconify/types@npm:^2.0.0":
   version: 2.0.0
   resolution: "@iconify/types@npm:2.0.0"
   checksum: 10c0/65a3be43500c7ccacf360e136d00e1717f050b7b91da644e94370256ac66f582d59212bdb30d00788aab4fc078262e91c95b805d1808d654b72f6d2072a7e4b2
@@ -1004,6 +1013,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@unocss/core@npm:66.1.0-beta.3":
+  version: 66.1.0-beta.3
+  resolution: "@unocss/core@npm:66.1.0-beta.3"
+  checksum: 10c0/da7b63d3cce7af560c6acc502b006f230a5c8cf2072e53cc8e3ffcb46500d2d8e0574c6e1d13634aca01c976bed3c57e4bfabf8f5be1dbc68fec9cd8806c96d0
+  languageName: node
+  linkType: hard
+
 "@unocss/extractor-arbitrary-variants@npm:66.0.0":
   version: 66.0.0
   resolution: "@unocss/extractor-arbitrary-variants@npm:66.0.0"
@@ -1060,6 +1076,17 @@ __metadata:
     "@unocss/core": "npm:66.0.0"
     ofetch: "npm:^1.4.1"
   checksum: 10c0/b5f5cd35e6582756534f44926215322b7b34988cd53b149fb061d3e69257050014a08b737a0756a9ed755b28f03dcbe554de36efef4875a4c73696f0aa61c4e3
+  languageName: node
+  linkType: hard
+
+"@unocss/preset-icons@npm:^66.1.0-beta.3":
+  version: 66.1.0-beta.3
+  resolution: "@unocss/preset-icons@npm:66.1.0-beta.3"
+  dependencies:
+    "@iconify/utils": "npm:^2.3.0"
+    "@unocss/core": "npm:66.1.0-beta.3"
+    ofetch: "npm:^1.4.1"
+  checksum: 10c0/724837b9bda072189c2767c2756221ea110e787a7a68731dd134f7ed3f5a7f1fbafebed1a1c79e801b80817713e26291c588f1e03b48bbde3026bca6a26497c1
   languageName: node
   linkType: hard
 
@@ -1711,10 +1738,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "atlassian-forge-dev-tools@workspace:."
   dependencies:
+    "@iconify-json/mdi": "npm:^1.2.3"
     "@trivago/prettier-plugin-sort-imports": "npm:^5.2.2"
     "@types/chrome": "npm:^0.0.307"
     "@types/lodash-es": "npm:^4.17.12"
     "@types/webextension-polyfill": "npm:^0.12.2"
+    "@unocss/preset-icons": "npm:^66.1.0-beta.3"
     "@vitejs/plugin-vue": "npm:^5.2.1"
     "@vue/tsconfig": "npm:^0.7.0"
     chrome-devtools-frontend: "npm:^1.0.1418433"
