@@ -1,6 +1,6 @@
-import presetChromeDevTools from "./unocss-preset-chrome-dev-tools";
-import { defineConfig, presetIcons, presetWind3 } from "unocss";
+import presetChromeDevTools from "./unocss/unocss-preset-chrome-dev-tools";
+import { defineConfig, presetIcons, presetMini } from "unocss";
 
 export default defineConfig({
-  presets: [presetWind3(), presetIcons(), presetChromeDevTools()],
+  presets: [presetChromeDevTools(), presetIcons()],
 });

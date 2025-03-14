@@ -6,5 +6,5 @@
     "target": "esnext",
     "strict": true
   },
-  "include": ["./*.ts"]
+  "include": ["./*.ts", "unocss/*.ts"]
 }

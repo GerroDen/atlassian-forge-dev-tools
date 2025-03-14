@@ -902,6 +902,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/json-stable-stringify@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@types/json-stable-stringify@npm:1.2.0"
+  dependencies:
+    json-stable-stringify: "npm:*"
+  checksum: 10c0/0ef08aaa468aeac8d632cb6cf0985ae1b091d0a0d662511a5830548704d50523b9246a5b353e31efe1a3b9d72f3b7317b38e0fd3e935ef84e2608b254642a73f
+  languageName: node
+  linkType: hard
+
 "@types/lodash-es@npm:^4.17.12":
   version: 4.17.12
   resolution: "@types/lodash-es@npm:4.17.12"
@@ -1741,6 +1750,7 @@ __metadata:
     "@iconify-json/mdi": "npm:^1.2.3"
     "@trivago/prettier-plugin-sort-imports": "npm:^5.2.2"
     "@types/chrome": "npm:^0.0.307"
+    "@types/json-stable-stringify": "npm:^1.2.0"
     "@types/lodash-es": "npm:^4.17.12"
     "@types/webextension-polyfill": "npm:^0.12.2"
     "@unocss/preset-icons": "npm:^66.1.0-beta.3"
@@ -1748,6 +1758,7 @@ __metadata:
     "@vue/tsconfig": "npm:^0.7.0"
     chrome-devtools-frontend: "npm:^1.0.1418433"
     husky: "npm:^9.1.7"
+    json-stable-stringify: "npm:^1.2.1"
     lint-staged: "npm:^15.4.3"
     lodash-es: "npm:^4.17.21"
     npm-run-all: "npm:^4.1.5"
@@ -4848,6 +4859,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"json-stable-stringify@npm:*, json-stable-stringify@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "json-stable-stringify@npm:1.2.1"
+  dependencies:
+    call-bind: "npm:^1.0.8"
+    call-bound: "npm:^1.0.3"
+    isarray: "npm:^2.0.5"
+    jsonify: "npm:^0.0.1"
+    object-keys: "npm:^1.1.1"
+  checksum: 10c0/e623e7ce89282f089d56454087edb717357e8572089b552fbc6980fb7814dc3943f7d0e4f1a19429a36ce9f4428b6c8ee6883357974457aaaa98daba5adebeea
+  languageName: node
+  linkType: hard
+
 "json5@npm:^2.2.3":
   version: 2.2.3
   resolution: "json5@npm:2.2.3"
@@ -4867,6 +4891,13 @@ __metadata:
     graceful-fs:
       optional: true
   checksum: 10c0/4f95b5e8a5622b1e9e8f33c96b7ef3158122f595998114d1e7f03985649ea99cb3cd99ce1ed1831ae94c8c8543ab45ebd044207612f31a56fd08462140e46865
+  languageName: node
+  linkType: hard
+
+"jsonify@npm:^0.0.1":
+  version: 0.0.1
+  resolution: "jsonify@npm:0.0.1"
+  checksum: 10c0/7f5499cdd59a0967ed35bda48b7cec43d850bbc8fb955cdd3a1717bb0efadbe300724d5646de765bb7a99fc1c3ab06eb80d93503c6faaf99b4ff50a3326692f6
   languageName: node
   linkType: hard
 
