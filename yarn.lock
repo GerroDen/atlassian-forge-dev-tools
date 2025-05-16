@@ -855,6 +855,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tsconfig/node22@npm:^22.0.1":
+  version: 22.0.1
+  resolution: "@tsconfig/node22@npm:22.0.1"
+  checksum: 10c0/9448a14da65ebdafe10bef2582df11c8c8a769b919854747ad97f127eedc188f5e383b5b08df74bd895fa3738f17a442f9de153c0b326f870f2b335f36b51c43
+  languageName: node
+  linkType: hard
+
 "@types/chrome@npm:^0.0.307":
   version: 0.0.307
   resolution: "@types/chrome@npm:0.0.307"
@@ -1029,6 +1036,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@unocss/core@npm:66.1.2, @unocss/core@npm:^66.1.2":
+  version: 66.1.2
+  resolution: "@unocss/core@npm:66.1.2"
+  checksum: 10c0/a428ff7cce3a30f4ab8ad1aa36998bec6b042464da57fc35bcc21ebbb185df6b5a42357eda0d4777b2aa36345d979007095bfd9c233a8fe8b14e5e4d8d8cf230
+  languageName: node
+  linkType: hard
+
 "@unocss/extractor-arbitrary-variants@npm:66.0.0":
   version: 66.0.0
   resolution: "@unocss/extractor-arbitrary-variants@npm:66.0.0"
@@ -1178,6 +1192,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@unocss/reset@npm:^66.1.0":
+  version: 66.1.2
+  resolution: "@unocss/reset@npm:66.1.2"
+  checksum: 10c0/a4282c6c30d92544b389155157011745c478d9f1ed4486b4138d1771d26396c568331ea0440a0d954d91eb48b649fa1415cfd6f58bed03314d23b2f7a8898ae7
+  languageName: node
+  linkType: hard
+
 "@unocss/rule-utils@npm:66.0.0":
   version: 66.0.0
   resolution: "@unocss/rule-utils@npm:66.0.0"
@@ -1185,6 +1206,16 @@ __metadata:
     "@unocss/core": "npm:^66.0.0"
     magic-string: "npm:^0.30.17"
   checksum: 10c0/f6c768273da1a207ca2783e947b291fcf8b4d18661cbdf68112c796930678af8617958a58d400c47c2b9f784a71c20733511045ea6c8908942b3349436c8aed1
+  languageName: node
+  linkType: hard
+
+"@unocss/rule-utils@npm:66.1.2":
+  version: 66.1.2
+  resolution: "@unocss/rule-utils@npm:66.1.2"
+  dependencies:
+    "@unocss/core": "npm:^66.1.2"
+    magic-string: "npm:^0.30.17"
+  checksum: 10c0/1753fc7735a084d72aa8fdbef7d0d3600827bd706addcf0d8bd35ca3b3e85c939c2d6ffd6208a758dd4240da9d7aebbf648746942a4c322dc3d97bc59b45e11e
   languageName: node
   linkType: hard
 
@@ -1214,6 +1245,17 @@ __metadata:
     "@unocss/rule-utils": "npm:66.0.0"
     css-tree: "npm:^3.1.0"
   checksum: 10c0/1504ee5c9bbee11927324dcd2471a95faf5c283c34f54082a016555e4aa8ce85602e74fc558bbfade3490743bdf8c7d9c5b3ef260431bbc10274023f283d86a4
+  languageName: node
+  linkType: hard
+
+"@unocss/transformer-directives@npm:^66.1.2":
+  version: 66.1.2
+  resolution: "@unocss/transformer-directives@npm:66.1.2"
+  dependencies:
+    "@unocss/core": "npm:66.1.2"
+    "@unocss/rule-utils": "npm:66.1.2"
+    css-tree: "npm:^3.1.0"
+  checksum: 10c0/9ed1de7fb2cd5942ad2e9b1ad08403064302ba6a5fa76c5d1e6e884356a31dd9827496d6c78a25cf492803061d2d9a471bd5895b8126835151182e0e2fbd18e0
   languageName: node
   linkType: hard
 
@@ -1749,11 +1791,14 @@ __metadata:
   dependencies:
     "@iconify-json/mdi": "npm:^1.2.3"
     "@trivago/prettier-plugin-sort-imports": "npm:^5.2.2"
+    "@tsconfig/node22": "npm:^22.0.1"
     "@types/chrome": "npm:^0.0.307"
     "@types/json-stable-stringify": "npm:^1.2.0"
     "@types/lodash-es": "npm:^4.17.12"
     "@types/webextension-polyfill": "npm:^0.12.2"
     "@unocss/preset-icons": "npm:^66.1.0-beta.3"
+    "@unocss/reset": "npm:^66.1.0"
+    "@unocss/transformer-directives": "npm:^66.1.2"
     "@vitejs/plugin-vue": "npm:^5.2.1"
     "@vue/tsconfig": "npm:^0.7.0"
     chrome-devtools-frontend: "npm:^1.0.1418433"

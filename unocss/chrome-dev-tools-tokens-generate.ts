@@ -19,24 +19,20 @@ while ((matches = cssPropertyPattern.exec(cssString))) {
     .replace("line.height", "lineHeight")
     .replace("extra.small", "extraSmall")
     .replace("font.family", "fontFamily")
+    .replace("color.", "colors.")
     .replace("font.size", "fontSize");
   if (!property.startsWith("sys-") && !property.startsWith("ref-")) {
     propPath = `text.${propPath}`;
   }
-  setWith(theme, propPath, `var(--${property})`, (nsValue, key, nsObject) => {
-    if (isString(nsValue)) {
-      return {
-        [defaultProp]: nsValue,
-      };
-    }
-    return Object(nsValue);
+  setWith(theme, propPath, `var(--${property})`, (nsValue) => {
+    return isString(nsValue) ? { [defaultProp]: nsValue } : Object(nsValue);
   });
 }
 
 const collator = new Intl.Collator("en", { numeric: true });
 const orders = {
   sizes: ["extraSmall", "small", "medium", "large", "full"],
-  typeScale: ["regular", "medium", "bold", "size", "lineHeight"],
+  typeScale: ["regular", "medium", "bold"],
 };
 const comparator = (a: { key: string; value: unknown }, b: { key: string; value: unknown }): number => {
   for (let order of Object.values(orders)) {
