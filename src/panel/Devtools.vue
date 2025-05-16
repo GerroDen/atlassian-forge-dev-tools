@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import type { Har, Request as HarRequest } from "har-format";
+import IconButton from "./IconButton.vue";
+import TextInput from "./TextInput.vue";
+import type { Har } from "har-format";
 import { get, isString } from "lodash-es";
 import { computed, onMounted, onUnmounted, type Ref, ref, useTemplateRef, watch } from "vue";
 
@@ -117,17 +119,15 @@ onUnmounted(() => {
 
 <template>
   <div class="h-full flex flex-col">
-    <div class="search-drawer-header gap-col-1">
-      <button class="icon" @click="clear()" title="Clear Calls"><devtools-icon class="i-mdi:cancel" /></button>
-      <div class="toolbar-item-search m-0!">
-        <input v-model.trim="filterInput" class="search-toolbar-input" type="text" placeholder="Filter" />
-      </div>
-      <button class="icon" @click="harFileRef?.click" title="Import HAR"><devtools-icon class="i-mdi:upload" /></button>
-      <input ref="harFile" type="file" accept=".har" @change="analyzeHar" class="hidden" />
+    <div class="flex gap-col-1 items-center">
+      <IconButton @click="clear()" title="Clear Calls"><div class="i-mdi:cancel" /></IconButton>
+      <TextInput v-model.trim="filterInput" placeholder="Filter" />
+      <IconButton @click="harFileRef?.click" title="Import HAR"><div class="i-mdi:upload" /></IconButton>
+      <input ref="harFile" class="hidden" type="file" accept=".har" @change="analyzeHar" />
     </div>
-    <div class="flex-1 grid" :class="{ 'grid-cols-2': selectedEntry }">
-      <div class="data-grid striped">
-        <table class="h-auto!">
+    <div class="h-full flex-1 grid" :class="{ 'grid-cols-2': selectedEntry }">
+      <div class="overflow-auto">
+        <table>
           <thead>
             <tr>
               <th>functionKey</th>
@@ -143,18 +143,24 @@ onUnmounted(() => {
               <td :title="request.environmentId">{{ request.environmentId }}</td>
               <td :title="request.extensionType">{{ request.extensionType }}</td>
             </tr>
+            <tr v-for="n in Array(100)">
+              <td>a</td>
+              <td>a</td>
+              <td>a</td>
+              <td>a</td>
+            </tr>
           </tbody>
         </table>
       </div>
-      <div class="pos-relative border border-l-solid border-l-divider-line border-t-solid border-t-divider-line" v-if="selectedEntry">
-        <div class="h-full overflow-auto">
-          <button class="icon" @click="selectedEntry = undefined" title="Close Details"><devtools-icon class="i-mdi:close" /></button>
-          <label>Request</label>
+      <div class="pos-relative border border-l-solid border-l-divider border-t-solid border-t-divider" v-if="selectedEntry">
+        <div class="h-full overflow-auto pos-relative">
+          <IconButton class="pos-absolute top-0 right-0" title="Close Details" @click="selectedEntry = undefined"><div class="i-mdi:close" /></IconButton>
+          <label class="head">Request</label>
           <div class="w-max">
             <json-pretty :data="selectedEntry?.payload" theme="dark" show-icon />
           </div>
-          <label v-if="!selectedResponse?.errors">Response</label>
-          <label v-if="selectedResponse?.errors" class="error">[Error]</label>
+          <label class="head" v-if="!selectedResponse?.errors">Response</label>
+          <label class="head error" v-if="selectedResponse?.errors">[Error]</label>
           <div class="w-max">
             <json-pretty v-if="selectedResponse?.response" :data="selectedResponse.response?.body" theme="dark" show-icon />
             <pre v-if="selectedResponse?.errors" v-for="error in selectedResponse?.errors">{{ error.message }}</pre>
@@ -166,27 +172,14 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-@import "chrome-devtools-frontend/front_end/ui/legacy/components/data_grid/dataGrid.css";
-@import "chrome-devtools-frontend/front_end/ui/components/buttons/button.css";
-@import "chrome-devtools-frontend/front_end/ui/components/buttons/textButton.css";
-@import "chrome-devtools-frontend/front_end/ui/components/input/textInput.css";
-@import "chrome-devtools-frontend/front_end/panels/search/searchView.css";
-
-label {
+.head {
   display: block;
-  position: sticky;
-  top: 0;
-  left: 0;
-  align-content: center;
-  z-index: 1;
-  background: var(--color-grid-selected);
-  padding-inline: 0.25rem;
-  width: 100%;
-  height: 1rem;
-  font: var(--sys-typescale-monospace-bold);
+  background: theme("colors.surface3");
+  padding: 2px;
 
-  &.error {
-    background: var(--color-red);
+  .error {
+    background: theme("colors.surface.error");
+    color: theme("colors.on.surface.error");
   }
 }
 </style>
