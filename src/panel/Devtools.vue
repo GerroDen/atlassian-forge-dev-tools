@@ -125,7 +125,7 @@ onUnmounted(() => {
       <IconButton @click="harFileRef?.click" title="Import HAR"><div class="i-mdi:upload" /></IconButton>
       <input ref="harFile" class="hidden" type="file" accept=".har" @change="analyzeHar" />
     </div>
-    <div class="h-full flex-1 grid" :class="{ 'grid-cols-2': selectedEntry }">
+    <div class="h-full pos-relative flex-1 grid" :class="{ 'grid-cols-2': selectedEntry }">
       <div class="overflow-auto">
         <table>
           <thead>
@@ -137,7 +137,7 @@ onUnmounted(() => {
             </tr>
           </thead>
           <tbody>
-            <tr v-for="request in filteredRequests" class="revealed" :class="{ selected: request === selectedEntry }" @click="toggleSelectedEntry(request)">
+            <tr v-for="request in filteredRequests" class="revealed" :class="{ 'bg-surface5!': request === selectedEntry }" @click="toggleSelectedEntry(request)">
               <td :title="request.functionKey">{{ request.functionKey }}</td>
               <td :title="request.environmentType">{{ request.environmentType }}</td>
               <td :title="request.environmentId">{{ request.environmentId }}</td>
@@ -146,19 +146,17 @@ onUnmounted(() => {
           </tbody>
         </table>
       </div>
-      <div class="pos-relative border border-l-solid border-l-divider border-t-solid border-t-divider" v-if="selectedEntry">
-        <div class="h-full overflow-auto pos-relative">
-          <IconButton class="pos-absolute top-0 right-0" title="Close Details" @click="selectedEntry = undefined"><div class="i-mdi:close" /></IconButton>
-          <label class="head">Request</label>
-          <div class="w-max">
-            <json-pretty :data="selectedEntry?.payload" theme="dark" show-icon />
-          </div>
-          <label class="head" v-if="!selectedResponse?.errors">Response</label>
-          <label class="head error" v-if="selectedResponse?.errors">[Error]</label>
-          <div class="w-max">
-            <json-pretty v-if="selectedResponse?.response" :data="selectedResponse.response?.body" theme="dark" show-icon />
-            <pre v-if="selectedResponse?.errors" v-for="error in selectedResponse?.errors">{{ error.message }}</pre>
-          </div>
+      <div class="border border-l-solid border-l-divider border-t-solid border-t-divider overflow-auto" v-if="selectedEntry">
+        <IconButton class="pos-absolute top-0 z-2" title="Close Details" @click="selectedEntry = undefined"><div class="i-mdi:close" /></IconButton>
+        <label class="head"> Request </label>
+        <div class="w-max">
+          <json-pretty :data="selectedEntry?.payload" theme="dark" show-icon />
+        </div>
+        <label class="head" v-if="!selectedResponse?.errors">Response</label>
+        <label class="head error" v-if="selectedResponse?.errors">[Error]</label>
+        <div class="w-max">
+          <json-pretty v-if="selectedResponse?.response" :data="selectedResponse.response?.body" theme="dark" show-icon />
+          <pre v-if="selectedResponse?.errors" v-for="error in selectedResponse?.errors">{{ error.message }}</pre>
         </div>
       </div>
     </div>
@@ -168,8 +166,12 @@ onUnmounted(() => {
 <style scoped>
 .head {
   display: block;
-  background: theme("colors.surface3");
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: theme("colors.surface");
   padding: 2px;
+  text-align: right;
 
   .error {
     background: theme("colors.surface.error");
