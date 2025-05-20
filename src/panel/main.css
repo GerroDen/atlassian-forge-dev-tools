@@ -3,6 +3,10 @@
 @import "chrome-devtools-frontend/front_end/design_system_tokens.css";
 @import "vue-json-pretty/lib/styles.css";
 
+*:not(a) {
+  cursor: default;
+}
+
 html,
 body {
   width: 100%;
@@ -29,6 +33,10 @@ table {
 tr {
   &:nth-of-type(2n) {
     background: theme("colors.surface");
+  }
+
+  &:hover {
+    background: theme("colors.surface5");
   }
 }
 
