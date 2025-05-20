@@ -143,12 +143,6 @@ onUnmounted(() => {
               <td :title="request.environmentId">{{ request.environmentId }}</td>
               <td :title="request.extensionType">{{ request.extensionType }}</td>
             </tr>
-            <tr v-for="n in Array(100)">
-              <td>a</td>
-              <td>a</td>
-              <td>a</td>
-              <td>a</td>
-            </tr>
           </tbody>
         </table>
       </div>
@@ -181,5 +175,9 @@ onUnmounted(() => {
     background: theme("colors.surface.error");
     color: theme("colors.on.surface.error");
   }
+}
+
+td {
+  white-space: nowrap;
 }
 </style>
