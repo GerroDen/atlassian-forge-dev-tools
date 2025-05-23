@@ -10,7 +10,6 @@ type RequestEntry = chrome.devtools.network.Request | chrome.devtools.network.HA
 interface Entry {
   request: RequestEntry;
   functionKey: string;
-  time: string;
   environmentType: string;
   environmentId: string;
   extensionType: string;
@@ -46,7 +45,6 @@ function addRequest(request: RequestEntry) {
   requests.value.push({
     request,
     functionKey: get(payload, "call.functionKey"),
-    time: `${Math.ceil(request.time)}ms`,
     environmentType: get(payload, "context.environmentType"),
     environmentId: get(payload, "context.environmentId"),
     extensionType: get(payload, "context.extension.type"),
@@ -108,6 +106,10 @@ function analyzeHar() {
   });
 }
 
+function formatTiming(timing: number = 0): string {
+  return Math.max(timing, 0).toFixed() + "ms";
+}
+
 onMounted(() => {
   chrome.devtools.network.onRequestFinished.addListener(addRequest);
   chrome.devtools.network.onNavigated.addListener(clear);
@@ -142,7 +144,7 @@ onUnmounted(() => {
           <tbody>
             <tr v-for="request in filteredRequests" class="revealed" :class="{ 'bg-surface5!': request === selectedEntry }" @click="toggleSelectedEntry(request)">
               <td :title="request.functionKey">{{ request.functionKey }}</td>
-              <td :title="request.time">{{ request.time }}</td>
+              <td>{{ formatTiming(request.request.time) }}</td>
               <td :title="request.environmentType">{{ request.environmentType }}</td>
               <td :title="request.environmentId">{{ request.environmentId }}</td>
               <td :title="request.extensionType">{{ request.extensionType }}</td>
@@ -162,7 +164,7 @@ onUnmounted(() => {
               </tr>
               <tr>
                 <td>time</td>
-                <td>{{ selectedEntry.time }}</td>
+                <td>{{ formatTiming(selectedEntry.request.time) }}</td>
               </tr>
               <tr>
                 <td>environmentType</td>
@@ -175,6 +177,37 @@ onUnmounted(() => {
               <tr>
                 <td>extensionType</td>
                 <td>{{ selectedEntry.extensionType }}</td>
+              </tr>
+              <tr>
+                <td colspan="2" class="border-t border-t-solid border-t-divider">Timings</td>
+              </tr>
+              <tr>
+                <td>blocked</td>
+                <td>{{ formatTiming(selectedEntry.request.timings.blocked) }}</td>
+              </tr>
+              <tr>
+                <td>dns</td>
+                <td>{{ formatTiming(selectedEntry.request.timings.dns) }}</td>
+              </tr>
+              <tr>
+                <td>connect</td>
+                <td>{{ formatTiming(selectedEntry.request.timings.connect) }}</td>
+              </tr>
+              <tr>
+                <td>send</td>
+                <td>{{ formatTiming(selectedEntry.request.timings.send) }}</td>
+              </tr>
+              <tr>
+                <td>wait</td>
+                <td>{{ formatTiming(selectedEntry.request.timings.wait) }}</td>
+              </tr>
+              <tr>
+                <td>receive</td>
+                <td>{{ formatTiming(selectedEntry.request.timings.receive) }}</td>
+              </tr>
+              <tr>
+                <td>ssl</td>
+                <td>{{ formatTiming(selectedEntry.request.timings.ssl) }}</td>
               </tr>
             </table>
           </section>
