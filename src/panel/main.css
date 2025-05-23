@@ -3,8 +3,8 @@
 @import "chrome-devtools-frontend/front_end/design_system_tokens.css";
 @import "vue-json-pretty/lib/styles.css";
 
-*:not(a) {
-  cursor: default;
+:root {
+  --base-font: theme("typescale.body4.regular");
 }
 
 html,
@@ -14,29 +14,45 @@ body {
 }
 
 html {
-  background: theme("colors.surface1");
-  color: theme("colors.on.surface");
+  background: theme("colors.base.container");
+  color: theme("colors.on.base");
+  font: var(--base-font);
 }
 
-html,
-th {
-  font: theme("typescale.body4.regular");
-  text-align: left;
+*:not(a) {
+  cursor: default;
+}
+
+code {
+  border: 1px solid theme("colors.base.container.elevated");
+  border-radius: theme("borderRadius.small");
+  background: theme("colors.base.container.elevated");
+  padding: 1px 5px;
+  font: theme("typescale.monospace.regular");
 }
 
 table {
   position: relative;
   border-collapse: separate;
   width: 100%;
-}
 
-tr {
-  &:nth-of-type(2n) {
-    background: theme("colors.surface");
-  }
+  &.striped {
+    & tr {
+      &:nth-of-type(2n) {
+        background: theme("colors.surface");
+      }
 
-  &:hover {
-    background: theme("colors.surface5");
+      &:hover {
+        background: theme("colors.surface5");
+      }
+    }
+
+    & th,
+    & td {
+      &:not(:first-of-type) {
+        border-left: 1px solid theme("colors.divider");
+      }
+    }
   }
 }
 
@@ -47,15 +63,10 @@ th {
   border-bottom: 1px solid theme("colors.divider");
   background: theme("colors.surface1");
   padding: 5px;
+  font: var(--base-font);
+  text-align: left;
 }
 
 td {
   padding: 1px 5px;
-}
-
-th,
-td {
-  &:not(:first-of-type) {
-    border-left: 1px solid theme("colors.divider");
-  }
 }

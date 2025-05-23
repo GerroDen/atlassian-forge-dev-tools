@@ -129,7 +129,7 @@ onUnmounted(() => {
     </div>
     <div class="h-full pos-relative flex-1 grid" :class="{ 'grid-cols-2': selectedEntry }">
       <div class="overflow-auto">
-        <table>
+        <table class="striped">
           <thead>
             <tr>
               <th>functionKey</th>
@@ -152,29 +152,58 @@ onUnmounted(() => {
       </div>
       <div class="border border-l-solid border-l-divider border-t-solid border-t-divider overflow-auto" v-if="selectedEntry">
         <IconButton class="pos-absolute top-0 z-2" title="Close Details" @click="selectedEntry = undefined"><div class="i-mdi:close" /></IconButton>
-        <label class="head"> Request </label>
-        <div class="w-max">
-          <json-pretty :data="selectedEntry?.payload" theme="dark" show-icon />
-        </div>
-        <label class="head" v-if="!selectedResponse?.errors">Response</label>
-        <label class="head error" v-if="selectedResponse?.errors">[Error]</label>
-        <div class="w-max">
-          <json-pretty v-if="selectedResponse?.response" :data="selectedResponse.response?.body" theme="dark" show-icon />
-          <pre v-if="selectedResponse?.errors" v-for="error in selectedResponse?.errors">{{ error.message }}</pre>
-        </div>
+        <details>
+          <summary>Details</summary>
+          <section>
+            <table>
+              <tr>
+                <td>functionKey</td>
+                <td>{{ selectedEntry.functionKey }}</td>
+              </tr>
+              <tr>
+                <td>time</td>
+                <td>{{ selectedEntry.time }}</td>
+              </tr>
+              <tr>
+                <td>environmentType</td>
+                <td>{{ selectedEntry.environmentType }}</td>
+              </tr>
+              <tr>
+                <td>environmentId</td>
+                <td>{{ selectedEntry.environmentId }}</td>
+              </tr>
+              <tr>
+                <td>extensionType</td>
+                <td>{{ selectedEntry.extensionType }}</td>
+              </tr>
+            </table>
+          </section>
+        </details>
+        <details open>
+          <summary>Request</summary>
+          <div class="json">
+            <json-pretty :data="selectedEntry?.payload" theme="dark" show-icon />
+          </div>
+        </details>
+        <details open>
+          <summary class="head" v-if="!selectedResponse?.errors">Response</summary>
+          <summary class="head error" v-if="selectedResponse?.errors">[Error]</summary>
+          <div class="json">
+            <json-pretty v-if="selectedResponse?.response" :data="selectedResponse.response?.body" theme="dark" show-icon />
+            <pre v-if="selectedResponse?.errors" v-for="error in selectedResponse?.errors">{{ error.message }}</pre>
+          </div>
+        </details>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.head {
-  display: block;
+summary {
   position: sticky;
   top: 0;
   z-index: 1;
   background: theme("colors.surface");
-  padding: 2px;
   text-align: right;
 
   .error {
@@ -183,7 +212,17 @@ onUnmounted(() => {
   }
 }
 
+summary,
+details > section {
+  padding: 1px 5px;
+}
+
 td {
   white-space: nowrap;
+}
+
+.json {
+  min-width: 100%;
+  max-width: max-content;
 }
 </style>
