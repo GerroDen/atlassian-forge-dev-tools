@@ -10,6 +10,7 @@ type RequestEntry = chrome.devtools.network.Request | chrome.devtools.network.HA
 interface Entry {
   request: RequestEntry;
   functionKey: string;
+  time: string;
   environmentType: string;
   environmentId: string;
   extensionType: string;
@@ -45,6 +46,7 @@ function addRequest(request: RequestEntry) {
   requests.value.push({
     request,
     functionKey: get(payload, "call.functionKey"),
+    time: `${Math.ceil(request.time)}ms`,
     environmentType: get(payload, "context.environmentType"),
     environmentId: get(payload, "context.environmentId"),
     extensionType: get(payload, "context.extension.type"),
@@ -131,6 +133,7 @@ onUnmounted(() => {
           <thead>
             <tr>
               <th>functionKey</th>
+              <th>time</th>
               <th>environmentType</th>
               <th>environmentId</th>
               <th>extension.type</th>
@@ -139,6 +142,7 @@ onUnmounted(() => {
           <tbody>
             <tr v-for="request in filteredRequests" class="revealed" :class="{ 'bg-surface5!': request === selectedEntry }" @click="toggleSelectedEntry(request)">
               <td :title="request.functionKey">{{ request.functionKey }}</td>
+              <td :title="request.time">{{ request.time }}</td>
               <td :title="request.environmentType">{{ request.environmentType }}</td>
               <td :title="request.environmentId">{{ request.environmentId }}</td>
               <td :title="request.extensionType">{{ request.extensionType }}</td>
