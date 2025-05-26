@@ -126,7 +126,7 @@ onUnmounted(() => {
     <div class="flex gap-col-1 items-center">
       <IconButton @click="clear()" title="Clear Calls"><div class="i-mdi:cancel" /></IconButton>
       <TextInput v-model.trim="filterInput" placeholder="Filter" />
-      <IconButton @click="harFileRef?.click" title="Import HAR"><div class="i-mdi:upload" /></IconButton>
+      <IconButton @click="harFileRef?.click()" title="Import HAR"><div class="i-mdi:upload" /></IconButton>
       <input ref="harFile" class="hidden" type="file" accept=".har" @change="analyzeHar" />
     </div>
     <div class="h-full pos-relative flex-1 grid" :class="{ 'grid-cols-2': selectedEntry }">
