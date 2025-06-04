@@ -18,7 +18,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Auto tag
-        uses: butlerlogic/action-autotag@1.1.4
+        uses: butlerlogic/action-autotag@1.1.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Use Node.js 22
