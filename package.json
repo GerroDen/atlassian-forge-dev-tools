@@ -17,7 +17,7 @@
   "dependencies": {
     "@unocss/reset": "^66.1.2",
     "chrome-devtools-frontend": "^1.0.1445635",
-    "lodash-es": "^4.17.21",
+    "lodash-es": "^4.17.23",
     "vue": "^3.5.14",
     "vue-json-pretty": "^2.4.0",
     "webextension-polyfill": "^0.12.0"
