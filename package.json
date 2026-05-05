@@ -1,7 +1,6 @@
 {
   "name": "atlassian-forge-dev-tools",
   "version": "0.4.1",
-  "packageManager": "yarn@4.6.0",
   "type": "module",
   "scripts": {
     "dev": "vite build --mode development",
@@ -9,9 +8,8 @@
     "build": "run-s 'build:*'",
     "build:vite": "vite build",
     "build:web-ext-lint": "web-ext lint -s dist/ --pretty",
-    "lint": "run-p 'lint:*'",
-    "lint:type": "vue-tsc --noEmit",
-    "lint:oxlint": "oxlint --quiet",
+    "lint": "oxlint",
+    "fmt": "oxfmt",
     "prepare": "husky"
   },
   "dependencies": {
@@ -24,7 +22,6 @@
   },
   "devDependencies": {
     "@iconify-json/mdi": "^1.2.3",
-    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
     "@tsconfig/node24": "^24.0.4",
     "@types/chrome": "^0.0.323",
     "@types/json-stable-stringify": "^1.2.0",
@@ -39,9 +36,9 @@
     "json-stable-stringify": "^1.3.0",
     "lint-staged": "^16.4.0",
     "npm-run-all-next": "^1.4.0",
-    "oxlint": "^0.16.11",
-    "prettier": "^3.5.3",
-    "prettier-plugin-css-order": "^2.1.2",
+    "oxfmt": "^0.47.0",
+    "oxlint": "^1.62.0",
+    "oxlint-tsgolint": "^0.22.1",
     "unocss": "^66.1.2",
     "vite": "^8.0.10",
     "vite-node": "^6.0.0",
@@ -50,5 +47,6 @@
     "vite-plugin-web-extension": "^4.5.1",
     "vue-tsc": "^3.2.8",
     "web-ext": "^10.1.0"
-  }
+  },
+  "packageManager": "yarn@4.6.0"
 }

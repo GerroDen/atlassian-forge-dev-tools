@@ -1,3 +1,0 @@
-{
-  "plugins": ["import", "promise", "unicorn", "typescript", "oxc", "security"]
-}

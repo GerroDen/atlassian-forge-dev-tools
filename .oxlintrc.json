@@ -1,0 +1,7 @@
+{
+  "plugins": ["eslint", "import", "node", "oxc", "promise", "typescript", "unicorn", "vue"],
+  "options": {
+    "typeAware": true,
+    "typeCheck": true
+  }
+}
