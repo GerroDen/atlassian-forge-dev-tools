@@ -2,7 +2,8 @@
 import IconButton from "./IconButton.vue";
 import TextInput from "./TextInput.vue";
 import type { Har } from "har-format";
-import { get, isString } from "lodash-es";
+import { get } from "es-toolkit/compat";
+import { isString } from "es-toolkit";
 import { computed, onMounted, onUnmounted, type Ref, ref, useTemplateRef, watch } from "vue";
 
 type RequestEntry = chrome.devtools.network.Request | chrome.devtools.network.HAREntry;
