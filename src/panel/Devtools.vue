@@ -40,7 +40,6 @@ function addRequest(request: RequestEntry) {
   const url = new URL(request.request.url);
   if (!url.pathname.startsWith("/gateway/api/graphql")) return;
   const requestBody = JSON.parse(request.request.postData?.text ?? "null");
-  console.log(requestBody);
   const operationName = get(requestBody, "operationName");
   if (!["forge_ui_invokeExtension", "useInvokeExtensionRelayMutation"].includes(operationName))
     return;
