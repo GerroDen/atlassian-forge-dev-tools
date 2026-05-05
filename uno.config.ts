@@ -1,6 +1,6 @@
 import themeTokens from "./unocss/chrome-dev-tools-tokens.json" with { type: "json" };
 import transformerDirectives from "@unocss/transformer-directives";
-import { get } from "lodash-es";
+import { get } from "es-toolkit/compat";
 import { defineConfig, presetIcons, presetMini } from "unocss";
 
 type Theme = typeof themeTokens;
