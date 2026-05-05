@@ -44,7 +44,6 @@
     "vite-node": "^6.0.0",
     "vite-plugin-oxlint": "^2.1.1",
     "vite-plugin-web-extension": "^4.5.1",
-    "vue-tsc": "^3.2.8",
     "web-ext": "^10.1.0"
   },
   "packageManager": "yarn@4.6.0"

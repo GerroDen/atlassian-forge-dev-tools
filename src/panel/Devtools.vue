@@ -37,10 +37,12 @@ const harFileRef = useTemplateRef<HTMLInputElement>("harFile");
 
 function addRequest(request: RequestEntry) {
   const url = new URL(request.request.url);
-  if (!url.pathname.endsWith("/gateway/api/graphql")) return;
+  if (!url.pathname.startsWith("/gateway/api/graphql")) return;
   const requestBody = JSON.parse(request.request.postData?.text ?? "null");
+  console.log(requestBody);
   const operationName = get(requestBody, "operationName");
-  if (operationName !== "forge_ui_invokeExtension") return;
+  if (!["forge_ui_invokeExtension", "useInvokeExtensionRelayMutation"].includes(operationName))
+    return;
   const payload = get(requestBody, "variables.input.payload");
   requests.value.push({
     request,
@@ -74,7 +76,12 @@ const filteredRequests = computed(() => {
     return requests.value;
   }
   return requests.value.filter((request) => {
-    const filterFields = [request.functionKey, request.environmentType, request.environmentId, request.extensionType];
+    const filterFields = [
+      request.functionKey,
+      request.environmentType,
+      request.environmentId,
+      request.extensionType,
+    ];
     return filterFields.some((value) => value.toLowerCase().includes(searchTerm.toLowerCase()));
   });
 });
@@ -126,7 +133,9 @@ onUnmounted(() => {
     <div class="flex gap-col-1 items-center">
       <IconButton @click="clear()" title="Clear Calls"><div class="i-mdi:cancel" /></IconButton>
       <TextInput v-model.trim="filterInput" placeholder="Filter" />
-      <IconButton @click="harFileRef?.click()" title="Import HAR"><div class="i-mdi:upload" /></IconButton>
+      <IconButton @click="harFileRef?.click()" title="Import HAR"
+        ><div class="i-mdi:upload"
+      /></IconButton>
       <input ref="harFile" class="hidden" type="file" accept=".har" @change="analyzeHar" />
     </div>
     <div class="h-full pos-relative flex-1 grid" :class="{ 'grid-cols-2': selectedEntry }">
@@ -142,7 +151,12 @@ onUnmounted(() => {
             </tr>
           </thead>
           <tbody>
-            <tr v-for="request in filteredRequests" class="revealed" :class="{ 'bg-surface5!': request === selectedEntry }" @click="toggleSelectedEntry(request)">
+            <tr
+              v-for="request in filteredRequests"
+              class="revealed"
+              :class="{ 'bg-surface5!': request === selectedEntry }"
+              @click="toggleSelectedEntry(request)"
+            >
               <td :title="request.functionKey">{{ request.functionKey }}</td>
               <td>{{ formatTiming(request.request.time) }}</td>
               <td :title="request.environmentType">{{ request.environmentType }}</td>
@@ -152,8 +166,16 @@ onUnmounted(() => {
           </tbody>
         </table>
       </div>
-      <div class="border border-l-solid border-l-divider border-t-solid border-t-divider overflow-auto" v-if="selectedEntry">
-        <IconButton class="pos-absolute top-0 z-2" title="Close Details" @click="selectedEntry = undefined"><div class="i-mdi:close" /></IconButton>
+      <div
+        class="border border-l-solid border-l-divider border-t-solid border-t-divider overflow-auto"
+        v-if="selectedEntry"
+      >
+        <IconButton
+          class="pos-absolute top-0 z-2"
+          title="Close Details"
+          @click="selectedEntry = undefined"
+          ><div class="i-mdi:close"
+        /></IconButton>
         <details>
           <summary>Details</summary>
           <section>
@@ -222,8 +244,15 @@ onUnmounted(() => {
           <summary class="head" v-if="!selectedResponse?.errors">Response</summary>
           <summary class="head error" v-if="selectedResponse?.errors">[Error]</summary>
           <div class="json">
-            <json-pretty v-if="selectedResponse?.response" :data="selectedResponse.response?.body" theme="dark" show-icon />
-            <pre v-if="selectedResponse?.errors" v-for="error in selectedResponse?.errors">{{ error.message }}</pre>
+            <json-pretty
+              v-if="selectedResponse?.response"
+              :data="selectedResponse.response?.body"
+              theme="dark"
+              show-icon
+            />
+            <pre v-if="selectedResponse?.errors" v-for="error in selectedResponse?.errors">{{
+              error.message
+            }}</pre>
           </div>
         </details>
       </div>
