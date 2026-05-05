@@ -1,9 +1,11 @@
 import themeTokens from "./unocss/chrome-dev-tools-tokens.json" with { type: "json" };
 import transformerDirectives from "@unocss/transformer-directives";
 import { get } from "lodash-es";
-import { defineConfig, Preset, presetIcons, presetMini } from "unocss";
+import { defineConfig, presetIcons, presetMini } from "unocss";
 
-export default defineConfig({
+type Theme = typeof themeTokens;
+export default defineConfig<Theme>({
+  // @ts-expect-error TS2322 -- typing goes wild, object != Theme
   presets: [presetMini(), presetIcons()],
   transformers: [transformerDirectives()],
   extendTheme: (theme) => ({
@@ -32,7 +34,7 @@ export default defineConfig({
         font: get(theme.typescale, [name, variant]),
       }),
     ],
-  ] satisfies Preset<typeof themeTokens>["rules"],
+  ],
   autocomplete: {
     templates: ["font-<typescale>-<type-variant>"],
     shorthands: {
