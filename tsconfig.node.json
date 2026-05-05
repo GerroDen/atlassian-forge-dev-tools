@@ -3,7 +3,8 @@
   "compilerOptions": {
     "composite": true,
     "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "types": ["node", "chrome"]
   },
   "include": ["*.ts", "unocss"]
 }

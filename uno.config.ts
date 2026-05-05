@@ -1,4 +1,4 @@
-import themeTokens from "./unocss/chrome-dev-tools-tokens.json";
+import themeTokens from "./unocss/chrome-dev-tools-tokens.json" with { type: "json" };
 import transformerDirectives from "@unocss/transformer-directives";
 import { get } from "lodash-es";
 import { defineConfig, Preset, presetIcons, presetMini } from "unocss";

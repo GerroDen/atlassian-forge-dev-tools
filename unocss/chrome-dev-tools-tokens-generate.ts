@@ -3,7 +3,10 @@ import { isString, setWith } from "lodash-es";
 import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
-const cssSourceFile = resolve(__dirname, "../node_modules/chrome-devtools-frontend/front_end/design_system_tokens.css");
+const cssSourceFile = resolve(
+  __dirname,
+  "../node_modules/chrome-devtools-frontend/front_end/design_system_tokens.css",
+);
 const jsonOutputFile = resolve(__dirname, "chrome-dev-tools-tokens.json");
 const cssPropertyPattern = /\s--([\w\d-]+): .*?;\s/g;
 const defaultProp = "DEFAULT";
@@ -34,7 +37,10 @@ const orders = {
   sizes: ["extraSmall", "small", "medium", "large", "full"],
   typeScale: ["regular", "medium", "bold"],
 };
-const comparator = (a: { key: string; value: unknown }, b: { key: string; value: unknown }): number => {
+const comparator = (
+  a: { key: string; value: unknown },
+  b: { key: string; value: unknown },
+): number => {
   for (let order of Object.values(orders)) {
     if (order.includes(a.key) && order.includes(b.key)) {
       return order.indexOf(a.key) - order.indexOf(b.key);
@@ -44,7 +50,13 @@ const comparator = (a: { key: string; value: unknown }, b: { key: string; value:
   if (b.key === defaultProp) return 1;
   return collator.compare(a.key, b.key);
 };
-const serializedTheme = jsonStableStringify(theme, { space: 2, cmp: comparator }).replace(/^\s/gm, "     ");
-
+const serializedTheme = jsonStableStringify(theme, { space: 2, cmp: comparator })?.replace(
+  /^\s/gm,
+  "     ",
+);
+if (!serializedTheme) {
+  console.error("unable to serialize theme");
+  process.exit(1);
+}
 await writeFile(jsonOutputFile, serializedTheme);
 console.info(`wrote to ${jsonOutputFile}`);
