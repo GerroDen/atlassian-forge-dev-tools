@@ -1,3 +1,3 @@
 export default {
-  "*": ["oxlint --quiet"],
+  "*": ["oxlint --quiet --no-error-on-unmatched-pattern"],
 };
