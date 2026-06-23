@@ -6,11 +6,8 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js 22
-        uses: mskelton/setup-yarn@v3
-        with:
-          node-version: "22.x"
+      - uses: actions/checkout@v7
+      - run: yarn
       - run: yarn lint
   build:
     runs-on: ubuntu-latest
@@ -18,18 +15,15 @@ jobs:
       contents: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Auto tag
-        uses: butlerlogic/action-autotag@1.1.2
+        uses: butlerlogic/action-autotag@1.1.4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Use Node.js 22
-        uses: mskelton/setup-yarn@v3
-        with:
-          node-version: "22.x"
+      - run: yarn
       - run: yarn build
       - name: Archive
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7.0.1
         with:
           name: atlassian-forge-dev-tools
           path: dist/**/*
