@@ -1,5 +1,6 @@
 import jsonStableStringify from "json-stable-stringify";
-import { isString, setWith } from "lodash-es";
+import { isString } from "es-toolkit";
+import { setWith } from "es-toolkit/compat";
 import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
