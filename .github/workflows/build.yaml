@@ -14,12 +14,15 @@ jobs:
       - run: yarn lint
   build:
     runs-on: ubuntu-latest
+    outputs:
+      tagname: ${{ steps.autotag.outputs.tagname }}
     permissions:
       contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Auto tag
+        id: autotag
         uses: butlerlogic/action-autotag@1.1.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -33,3 +36,31 @@ jobs:
         with:
           name: atlassian-forge-dev-tools
           path: dist/**/*
+  publish-cws:
+    needs: build
+    if: ${{ needs.build.outputs.tagname }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish to CWS
+        uses: mobilefirstllc/cws-publish@2.1.1
+        with:
+          action: "publish"
+          client_id: ${{ secrets.CWS_CLIENT_ID }}
+          client_secret: ${{ secrets.CWS_SECRET }}
+          refresh_token: ${{ secrets.CWS_REFRESH_TOKEN }}
+          extension_id: "atlassian-forge-dev-tools@seibert.group"
+          zip_file: "atlassian-forge-dev-tools.zip"
+  publish-amo:
+    needs: build
+    if: ${{ needs.build.outputs.tagname }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: wdzeng/firefox-addon@v1.2.0
+        with:
+          jwt-issuer: ${{ secrets.AMO_JWT_ISSUER }}
+          jwt-secret: ${{ secrets.AMO_JWT_SECRET }}
+          self-hosted: false
+          addon-guid: "atlassian-forge-dev-tools@seibert.group"
+          xpi-path: "atlassian-forge-dev-tools.zip"
+          approval-notes: |-
+            The source code is open source available under https://github.com/GerroDen/atlassian-forge-dev-tools
