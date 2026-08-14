@@ -54,6 +54,11 @@ function addRequest(request: RequestEntry) {
   });
 }
 
+function copyToClipboard(text: unknown) {
+  if (!text) return;
+  navigator.clipboard.writeText(JSON.stringify(text));
+}
+
 watch(selectedEntry, () => {
   selectedResponse.value = undefined;
   const request = selectedEntry.value?.request;
@@ -235,13 +240,26 @@ onUnmounted(() => {
           </section>
         </details>
         <details open>
-          <summary>Request</summary>
+          <summary>
+            Request
+            <a href="#" @click="copyToClipboard(selectedEntry?.payload)" title="copy to clipboard"
+              >✨</a
+            >
+          </summary>
           <div class="json">
             <json-pretty :data="selectedEntry?.payload" theme="dark" show-icon />
           </div>
         </details>
         <details open>
-          <summary class="head" v-if="!selectedResponse?.errors">Response</summary>
+          <summary class="head" v-if="!selectedResponse?.errors">
+            Response
+            <a
+              href="#"
+              @click="copyToClipboard(selectedResponse?.response?.body)"
+              title="copy to clipboard"
+              >✨</a
+            >
+          </summary>
           <summary class="head error" v-if="selectedResponse?.errors">[Error]</summary>
           <div class="json">
             <json-pretty
