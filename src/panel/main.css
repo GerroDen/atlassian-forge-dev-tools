@@ -70,3 +70,10 @@ th {
 td {
   padding: 1px 5px;
 }
+
+.data-key {
+  padding-block: 1px;
+}
+.value-key {
+  padding-block: 1px;
+}
