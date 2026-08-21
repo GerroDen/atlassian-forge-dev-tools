@@ -149,7 +149,6 @@ onUnmounted(() => {
     </div>
     <div class="h-full pos-relative flex-1 grid" :class="{ 'grid-cols-2': selectedEntry }">
       <div class="overflow-auto">
-        <JsonTreeView :json="json" colorScheme="dark" />
         <table class="striped">
           <thead>
             <tr>
