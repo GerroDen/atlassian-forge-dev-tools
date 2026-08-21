@@ -5,6 +5,7 @@ import type { Har } from "har-format";
 import { get } from "es-toolkit/compat";
 import { isString } from "es-toolkit";
 import { computed, onMounted, onUnmounted, type Ref, ref, useTemplateRef, watch } from "vue";
+import { JsonTreeView } from "json-tree-view-vue3";
 
 type RequestEntry = chrome.devtools.network.Request | chrome.devtools.network.HAREntry;
 
@@ -52,6 +53,11 @@ function addRequest(request: RequestEntry) {
     extensionType: get(payload, "context.extension.type"),
     payload: get(payload, "call.payload"),
   });
+}
+
+function copyToClipboard(object: unknown) {
+  if (!object) return;
+  navigator.clipboard.writeText(JSON.stringify(object));
 }
 
 watch(selectedEntry, () => {
@@ -235,20 +241,36 @@ onUnmounted(() => {
           </section>
         </details>
         <details open>
-          <summary>Request</summary>
+          <summary>
+            Request
+            <a href="#" @click="copyToClipboard(selectedEntry?.payload)" title="copy to clipboard"
+              >✨</a
+            >
+          </summary>
           <div class="json">
-            <json-pretty :data="selectedEntry?.payload" theme="dark" show-icon />
+            <JsonTreeView
+              v-if="selectedEntry?.payload"
+              :json="JSON.stringify(selectedEntry?.payload)"
+              colorScheme="dark"
+            />
           </div>
         </details>
         <details open>
-          <summary class="head" v-if="!selectedResponse?.errors">Response</summary>
+          <summary class="head" v-if="!selectedResponse?.errors">
+            Response
+            <a
+              href="#"
+              @click="copyToClipboard(selectedResponse?.response?.body)"
+              title="copy to clipboard"
+              >✨</a
+            >
+          </summary>
           <summary class="head error" v-if="selectedResponse?.errors">[Error]</summary>
           <div class="json">
-            <json-pretty
-              v-if="selectedResponse?.response"
-              :data="selectedResponse.response?.body"
-              theme="dark"
-              show-icon
+            <JsonTreeView
+              v-if="selectedResponse?.response?.body"
+              :json="JSON.stringify(selectedResponse?.response?.body)"
+              colorScheme="dark"
             />
             <pre v-if="selectedResponse?.errors" v-for="error in selectedResponse?.errors">{{
               error.message

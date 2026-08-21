@@ -2012,6 +2012,7 @@ __metadata:
     es-toolkit: "npm:^1.46.1"
     husky: "npm:^9.1.7"
     json-stable-stringify: "npm:^1.3.0"
+    json-tree-view-vue3: "npm:^2.0.0"
     lint-staged: "npm:^16.4.0"
     npm-run-all-next: "npm:^1.4.0"
     oxfmt: "npm:^0.47.0"
@@ -2023,7 +2024,6 @@ __metadata:
     vite-plugin-oxlint: "npm:^2.1.1"
     vite-plugin-web-extension: "npm:^4.5.1"
     vue: "npm:^3.5.33"
-    vue-json-pretty: "npm:^2.6.0"
     web-ext: "npm:^10.1.0"
     webextension-polyfill: "npm:^0.12.0"
   languageName: unknown
@@ -4809,6 +4809,15 @@ __metadata:
     jsonify: "npm:^0.0.1"
     object-keys: "npm:^1.1.1"
   checksum: 10c0/8b3ff19e4c23c0ad591a49bc3a015d89a538db787d12fe9c4072e1d64d8cfa481f8c37719c629c3d84e848847617bf49f5fee894cf1d25959ab5b67e1c517f31
+  languageName: node
+  linkType: hard
+
+"json-tree-view-vue3@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "json-tree-view-vue3@npm:2.0.0"
+  peerDependencies:
+    vue: ">=3.2.0"
+  checksum: 10c0/5f0dd0915877908a4923ea0a1e08a8d42f2b917d276faff86fc7f4daa84b8b8a1f423f28a2b33d38b03fc76da915090b73b5385b243949295bbabe29242c429c
   languageName: node
   linkType: hard
 
@@ -8053,15 +8062,6 @@ __metadata:
   bin:
     vite: bin/vite.js
   checksum: 10c0/92188b82654f856dbe562a1b679de695bb6ca18c0f43c4c276f84a869fb78e22dedb7c2df83b5617d6afdca979c059d654b5f61a0936a45f49917f352b9325ca
-  languageName: node
-  linkType: hard
-
-"vue-json-pretty@npm:^2.6.0":
-  version: 2.6.0
-  resolution: "vue-json-pretty@npm:2.6.0"
-  peerDependencies:
-    vue: ">=3.0.0"
-  checksum: 10c0/834d5326ddd15afb1a98ef4dbbb524d9afc0eead07d01d365aa5fe0cafa0cc4494990a31c98f82452f8700408f2156a236bb89db11237f362e7fb72056a28969
   languageName: node
   linkType: hard
 
