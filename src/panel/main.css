@@ -75,5 +75,9 @@ td {
   padding-block: 1px;
 }
 .value-key {
+  margin: 0;
   padding-block: 1px;
+}
+.chevron-arrow {
+  margin-inline: 5px;
 }
